@@ -2202,7 +2202,7 @@ async function renderPublicSite(root) {
   };
   const site = (ADMIN && ADMIN.site) ? Object.assign({}, siteFallback, ADMIN.site) : siteFallback;
   if (!site.name || site.name === "패더쿠") site.name = "패더쿠의 옷장";
-  if (!site.avatar) site.avatar = "/img/avatar.jpg";
+  if (!site.avatar) site.avatar = location.origin + "/img/avatar.jpg";
   if (site.footer) site.footer = site.footer.replace(/^패더쿠 ·/, "패더쿠의 옷장 ·");
   if (site.bio) site.bio = site.bio.replace("지금 제일 핫한 여성 아이템만", "남녀 상관없이 지금 제일 핫한 아이템만");
   { const ib = document.getElementById("md-intro-brand"); if (ib) ib.textContent = site.brand; }
