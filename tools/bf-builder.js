@@ -33,7 +33,9 @@
   for (const c of ['002', '103', '001', '003', '004', '100']) { const ids = await rank(200, c, 'AGE_BAND_ALL', 'REALTIME'); await fetchInfo(ids); const id = ids.find((x) => ok(x) && (info[x].saleRate || 0) >= 10 && !rt.includes(x)); if (id) rt.push(id); }
   await link(rt);
   const short = (s) => { s = String(s || '').replace(/\[[^\]]*\]|\([^)]*\)|_[A-Z0-9]{6,}.*$|\/.*$/g, '').replace(/\s+/g, ' ').trim(); return s.length > 15 ? s.slice(0, 15).trim() + '…' : s; };
-  const lineup = rt.map(item).filter(Boolean).slice(0, 6).map((x, k) => ({ id: 'pdk' + x.i, link: x.link, photo: x.img.replace('_500.', '_big.'), ratio: '3/4', eyebrow: x.brand, sticker: k === 0 ? 'HOT' : x.rate + '% OFF', headline: short(x.name) + '\n지금 ' + x.rate + '% 할인' }));
+  const HOOK = [[/패딩|푸퍼|다운/, '올겨울 제일 많이 산\n그 패딩'], [/뮬|슬리퍼|클로그/, '요즘 다 신는\n그 털 뮬'], [/부츠|어그/, '겨울 내내 신을\n그 부츠'], [/데님|청바지|진$/, '다리 길어 보이는\n그 데님'], [/백|가방|BAG|bag/, '요즘 제일 많이 든\n그 가방'], [/스커트|skirt|SKIRT/, '지금 제일 핫한\n그 스커트'], [/후디|후드|맨투맨|스웻/, '꾸안꾸 끝판왕\n그 후디'], [/코트/, '한 벌로 끝나는\n그 코트'], [/니트|가디건/, '포근한 핏\n그 니트'], [/플리스|후리스/, '요즘 다 입는\n그 플리스'], [/무스탕|퍼/, '올겨울 무드 장인\n그 무스탕']];
+  const hook = (n) => { for (const [re, t] of HOOK) if (re.test(n)) return t; return '지금 제일 핫한\n이 아이템'; };
+  const lineup = rt.map(item).filter(Boolean).slice(0, 6).map((x, k) => ({ id: 'pdk' + x.i, link: x.link, photo: x.img.replace('_500.', '_big.'), ratio: '3/4', eyebrow: x.brand + ' · 지금 ' + x.rate + '% 할인', sticker: k === 0 ? 'HOT' : x.rate + '% OFF', headline: hook(x.name) }));
   // 분위기별
   const MOOD = [['202', '캐주얼'], ['301', '걸리시'], ['205', '미니멀'], ['203', '스트릿'], ['209', '포멀']];
   const moodCats = [];
