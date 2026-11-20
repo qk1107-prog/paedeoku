@@ -2391,16 +2391,6 @@ async function renderPublicSite(root) {
         <div id="lp-list"></div>
       </section>
       </div>
-      <form class="wish-box" id="wish-form" autocomplete="off">
-        <p class="wish-t">🙋 찾는 옷이 있다면 적어주세요</p>
-        <p class="wish-s">패더쿠가 같이 찾아서 올려드릴게요</p>
-        <textarea id="wish-msg" maxlength="200" rows="2" placeholder="예) 3만원대 블랙 와이드 데님 / 키 작은 사람 숏패딩"></textarea>
-        <input type="text" id="wish-hp" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
-        <div class="wish-row">
-          <button type="submit" id="wish-btn">보내기</button>
-        </div>
-        <p class="wish-done" id="wish-done" hidden></p>
-      </form>
       <div class="site-footer">
         <p class="footer-brand">${esc(site.footer)}</p>
         <p class="footer-ad">이 포스팅은 무신사 큐레이터 활동의 일환으로, 구매 발생 시 수수료를 제공받습니다.</p>
@@ -3402,6 +3392,7 @@ renderPublicSite(ROOT_EL);
 <script>
 // ---------- 블프 위시리스트 팝업 (들어올 때마다, 바로 닫을 수 있음) ----------
 (function(){
+  return; // 패더쿠: 위시리스트 팝업 끔
   try{
     const qs=location.search, force=/[?&]wish=1/.test(qs);
     if(!force){
