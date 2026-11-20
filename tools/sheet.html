@@ -1,0 +1,9 @@
+<!doctype html><meta charset="utf-8"><title>sheet</title>
+<style>body{margin:0;background:#fff}#g{display:grid;grid-template-columns:repeat(4,480px);width:1920px}#g div{width:480px;height:576px;background:#fff center/contain no-repeat}</style>
+<div id="g"></div>
+<script>
+// 이미지 여러 장을 한 화면에 깔아 한 번에 캡처하기 위한 도구. 주소 뒤 #경로,경로,... (image.msscdn.net/images/ 뒤 부분)
+const g=document.getElementById('g');
+decodeURIComponent(location.hash.slice(1)).split(',').filter(Boolean).forEach(p=>{if(!/^[A-Za-z0-9_\/.\-]+$/.test(p))return;const d=document.createElement('div');d.style.backgroundImage='url(https://image.msscdn.net/images/'+p+')';g.appendChild(d);});
+document.title='sheet '+g.children.length;
+</script>
