@@ -2196,6 +2196,9 @@ async function renderPublicSite(root) {
     footer: "패더쿠 x paedeoku", avatar: "",
   };
   const site = (ADMIN && ADMIN.site) ? Object.assign({}, siteFallback, ADMIN.site) : siteFallback;
+  if (!site.name || site.name === "패더쿠") site.name = "패더쿠의 옷장";
+  if (!site.avatar) site.avatar = "/img/avatar.jpg";
+  if (site.bio) site.bio = site.bio.replace("지금 제일 핫한 여성 아이템만", "남녀 상관없이 지금 제일 핫한 아이템만");
   { const ib = document.getElementById("md-intro-brand"); if (ib) ib.textContent = site.brand; }
 
   // 컷 구분(타이트 컷 / 전체 컷 등): 어드민 분류 순서대로, 코디가 있는 분류만
