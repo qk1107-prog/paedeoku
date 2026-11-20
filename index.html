@@ -3155,6 +3155,8 @@ async function renderPublicSite(root) {
   const TAB_ORDER = [BF_ON ? "bf" : "", BR_ON ? "brands" : "", "cats"].filter(Boolean);
   const buttons = root.querySelectorAll("nav.tabs button");
   const slider = root.querySelector("#tab-slider");
+  // 숨긴 탭 섹션은 슬라이더 밖으로 (탭 순서와 슬라이더 칸 순서 맞추기)
+  (function () { const park = document.createElement("div"); park.hidden = true; slider.parentNode.appendChild(park); slider.querySelectorAll(":scope > .section-off").forEach((sec) => park.appendChild(sec)); })();
   const viewport = root.querySelector("#tab-viewport");
   let activeIndex = 0;
   const step = 100 / TAB_ORDER.length;
