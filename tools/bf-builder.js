@@ -1,7 +1,7 @@
 // 패더쿠 블프 데이터(여성) 만들기 — 크롬 무신사 탭(큐레이터 로그인)에서 실행
 // 결과: window.__pdkMain (JSON 문자열) → sink로 site_data id='pdk_main' 저장
 (async () => {
-  const BAD = /키즈|KIDS|하이큐|진격|산리오|포켓몬|짱구|디즈니|마블|귀멸|주술|레깅스|양말|삭스|스타킹|속옷|브라|팬티|파우치|폰케이스|마스크팩/;
+  const BAD = /키즈|KIDS|하이큐|진격|산리오|포켓몬|짱구|디즈니|마블|귀멸|주술|레깅스|양말|삭스|스타킹|속옷|브라렛|브래지어|팬티|파우치|폰케이스|마스크팩|틴트|립스틱|쿠션 팩트|세럼|수분크림|핸드크림|앰플|눈썹|향수|네일|토너|선크림|클렌징|샴푸/;
   const info = {};
   const fetchInfo = async (ids) => { ids = ids.filter((id) => !info[id]); for (let i = 0; i < ids.length; i += 30) { try { const j = await (await fetch('https://content.musinsa.com/api2/content/magazine-misc/v1/goods?saleStates=SALE&goodsIds=' + ids.slice(i, i + 30).join(',') + '&sort=RANK&tabId=default&gf=A', { credentials: 'include' })).json(); ((j.data && (j.data.list || j.data.goods)) || []).forEach((g) => (info[String(g.goodsNo)] = g)); } catch (e) {} } };
   const search = async (kw) => { try { const h = await (await fetch('https://www.musinsa.com/search/goods?keyword=' + encodeURIComponent(kw) + '&gf=F&sortCode=SALE_ONE_WEEK_COUNT', { credentials: 'include' })).text(); return [...new Set((h.match(/products\/(\d{6,8})/g) || []).map((x) => x.slice(9)))]; } catch (e) { return []; } };
@@ -20,13 +20,17 @@
   const xmas = { at: new Date().toISOString(), groups: [] };
   for (const [label, kw, n] of XMAS) xmas.groups.push({ label, items: await build(kw, n) });
   // 프리오픈 추천: 여성 랭킹 상위 중 할인 큰 것
-  const pool = [...new Set([].concat(await rank(200, '000', 'AGE_BAND_20'), await rank(200, '000', 'AGE_BAND_25'), await rank(200, '002', 'AGE_BAND_20'), await rank(200, '103', 'AGE_BAND_20'), await rank(200, '000', 'AGE_BAND_ALL', 'REALTIME')))];
+  const CATS = ['002', '001', '003', '100', '103', '004', '101'];
+  let pool = [];
+  for (const c of CATS) for (const a of ['AGE_BAND_20', 'AGE_BAND_25']) pool = pool.concat((await rank(200, c, a)).slice(0, 30));
+  pool = [...new Set(pool)];
   await fetchInfo(pool);
   let pre = pool.filter((id) => ok(id) && (info[id].saleRate || 0) >= 15 && (info[id].reviewCount || 0) >= 10).sort((a, b) => (info[b].saleRate + Math.log10(info[b].reviewCount + 1) * 8) - (info[a].saleRate + Math.log10(info[a].reviewCount + 1) * 8)).slice(0, 40);
   await link(pre);
   const teaser = { groups: [{ label: '프리오픈 추천', items: noRepeat(pre.map(item).filter(Boolean)).slice(0, 34) }] };
   // 라인업: 실시간 인기 중 할인 있는 것 6개
-  const rt = (await rank(200, '000', 'AGE_BAND_ALL', 'REALTIME')).filter((id) => ok(id) && (info[id].saleRate || 0) >= 10).slice(0, 8);
+  let rt = [];
+  for (const c of ['002', '103', '001', '003', '004', '100']) { const ids = await rank(200, c, 'AGE_BAND_ALL', 'REALTIME'); await fetchInfo(ids); const id = ids.find((x) => ok(x) && (info[x].saleRate || 0) >= 10 && !rt.includes(x)); if (id) rt.push(id); }
   await link(rt);
   const short = (s) => { s = String(s || '').replace(/\[[^\]]*\]|\([^)]*\)|_[A-Z0-9]{6,}.*$|\/.*$/g, '').replace(/\s+/g, ' ').trim(); return s.length > 15 ? s.slice(0, 15).trim() + '…' : s; };
   const lineup = rt.map(item).filter(Boolean).slice(0, 6).map((x, k) => ({ id: 'pdk' + x.i, link: x.link, photo: x.img.replace('_500.', '_big.'), ratio: '3/4', eyebrow: x.brand, sticker: k === 0 ? 'HOT' : x.rate + '% OFF', headline: short(x.name) + '\n지금 ' + x.rate + '% 할인' }));
