@@ -47,7 +47,7 @@
   for (const [sec, mood] of MOOD) { const ids = (await rank(sec, '000', 'AGE_BAND_20')); await fetchInfo(ids); const p = ids.filter((id) => ok(id)).slice(0, 24); await link(p); const items = noRepeat(p.map(item).filter(Boolean)).slice(0, 20); if (items.length >= 8) moodCats.push({ mood, groups: [{ cat: '인기 TOP 20', items }] }); }
   const out = {
     at: new Date().toISOString(),
-    site: { name: '패더쿠', brand: '패더쿠', avatar: '', instagram: 'paedeoku', footer: '패더쿠 · 패션 할인 소식 제일 빠른 곳', bio: '🔥 무진장 · 무신사 블랙프라이데이 할인 소식 제일 빠른 곳\n지금 제일 핫한 여성 아이템만 골라서 정리했어요\n블프 탭부터 보시고, 카테고리 꿀템도 둘러보세요' },
+    site: { name: '패더쿠의 옷장', brand: '패더쿠', avatar: '/img/avatar.jpg', instagram: 'paedeoku', footer: '패더쿠 · 패션 할인 소식 제일 빠른 곳', bio: '🔥 무진장 · 무신사 블랙프라이데이 할인 소식 제일 빠른 곳\n남녀 상관없이 지금 제일 핫한 아이템만 골라서 정리했어요\n블프 탭부터 보시고, 카테고리 꿀템도 둘러보세요' },
     lineup, moodCats,
     bf: { padding, xmas, teaser, sigPreview: [], sigBrands: [], days: {}, bestTabs: {} },
   };
