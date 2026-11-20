@@ -3111,7 +3111,7 @@ async function renderPublicSite(root) {
   })();
 
   // ---------- 탭 ----------
-  const TAB_ORDER = [BF_ON ? "bf" : "", "cats", BR_ON ? "brands" : ""].filter(Boolean);
+  const TAB_ORDER = [BF_ON ? "bf" : "", BR_ON ? "brands" : "", "cats"].filter(Boolean);
   const buttons = root.querySelectorAll("nav.tabs button");
   const slider = root.querySelector("#tab-slider");
   const viewport = root.querySelector("#tab-viewport");
