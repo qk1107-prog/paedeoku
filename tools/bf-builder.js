@@ -28,14 +28,19 @@
   let pre = pool.filter((id) => ok(id) && (info[id].saleRate || 0) >= 15 && (info[id].reviewCount || 0) >= 10).sort((a, b) => (info[b].saleRate + Math.log10(info[b].reviewCount + 1) * 8) - (info[a].saleRate + Math.log10(info[a].reviewCount + 1) * 8)).slice(0, 40);
   await link(pre);
   const teaser = { groups: [{ label: '프리오픈 추천', items: noRepeat(pre.map(item).filter(Boolean)).slice(0, 34) }] };
-  // 라인업: 실시간 인기 중 할인 있는 것 6개
-  let rt = [];
-  for (const c of ['002', '103', '001', '003', '004', '100']) { const ids = await rank(200, c, 'AGE_BAND_ALL', 'REALTIME'); await fetchInfo(ids); const id = ids.find((x) => ok(x) && (info[x].saleRate || 0) >= 10 && !rt.includes(x)); if (id) rt.push(id); }
-  await link(rt);
-  const short = (s) => { s = String(s || '').replace(/\[[^\]]*\]|\([^)]*\)|_[A-Z0-9]{6,}.*$|\/.*$/g, '').replace(/\s+/g, ' ').trim(); return s.length > 15 ? s.slice(0, 15).trim() + '…' : s; };
-  const HOOK = [[/패딩|푸퍼|다운/, '올겨울 제일 많이 산\n그 패딩'], [/뮬|슬리퍼|클로그/, '요즘 다 신는\n그 털 뮬'], [/부츠|어그/, '겨울 내내 신을\n그 부츠'], [/데님|청바지|진$/, '다리 길어 보이는\n그 데님'], [/백|가방|BAG|bag/, '요즘 제일 많이 든\n그 가방'], [/스커트|skirt|SKIRT/, '지금 제일 핫한\n그 스커트'], [/후디|후드|맨투맨|스웻/, '꾸안꾸 끝판왕\n그 후디'], [/코트/, '한 벌로 끝나는\n그 코트'], [/니트|가디건/, '포근한 핏\n그 니트'], [/플리스|후리스/, '요즘 다 입는\n그 플리스'], [/무스탕|퍼/, '올겨울 무드 장인\n그 무스탕']];
-  const hook = (n) => { for (const [re, t] of HOOK) if (re.test(n)) return t; return '지금 제일 핫한\n이 아이템'; };
-  const lineup = rt.map(item).filter(Boolean).slice(0, 6).map((x, k) => ({ id: 'pdk' + x.i, link: x.link, photo: x.img.replace('_500.', '_big.'), ratio: '3/4', eyebrow: x.brand + ' · 지금 ' + x.rate + '% 할인', sticker: k === 0 ? 'HOT' : x.rate + '% OFF', headline: hook(x.name) }));
+  // 라인업: 성별 상관없이 누구나 아는 대표 핫템 (브랜드 대표 아이템)
+  const ICON = [['아디다스 파이어버드 트랙팬츠', /팬츠/, '요즘 다 입는\n그 트랙팬츠'], ['노스페이스 눕시 다운 자켓', /자켓|재킷|패딩/, '올겨울 교복\n그 눕시'], ['어그 울트라 미니', /미니/, '겨울 필수\n그 어그'], ['아디다스 삼바', /삼바/, '아직도 제일 많이 신는\n그 삼바'], ['몽벨 다운', /다운|패딩|베스트|플리스/, '등산룩 대세\n그 몽벨'], ['뉴발란스 1906', /1906/, '어디에 신어도 되는\n그 뉴발'], ['노스페이스 눕시 뮬', /뮬/, '요즘 다 신는\n그 털 뮬'], ['살로몬 XT-6', /XT-6/, '고프코어 끝판왕\n그 살로몬']];
+  const searchA = async (kw) => { try { const h = await (await fetch('https://www.musinsa.com/search/goods?keyword=' + encodeURIComponent(kw) + '&gf=A&sortCode=SALE_ONE_WEEK_COUNT', { credentials: 'include' })).text(); return [...new Set([...h.matchAll(/products\/(\d{6,9})/g)].map((m) => m[1]))].slice(0, 10); } catch (e) { return []; } };
+  const lineup = [];
+  for (const [kw, must, headline] of ICON) {
+    const ids = (await searchA(kw)); await fetchInfo(ids);
+    const okA = (id) => { const f = info[id]; return f && !f.isSoldOut && must.test(f.goodsName || '') && !/남성|\s남\s|\s남$|\[MEN\]|키즈|KIDS/.test(f.goodsName || ''); };
+    const top = ids.filter(okA).slice(0, 3).filter((id) => !lineup.some((l) => l.id === 'pdk' + id));
+    if (!top.length) continue;
+    const id = top.reduce((p, c) => ((info[c].saleRate || 0) > (info[p].saleRate || 0) + 9 ? c : p), top[0]);
+    await link([id]); const x = item(id); if (!x) continue;
+    lineup.push({ id: 'pdk' + id, link: x.link, photo: x.img.replace('_500.', '_big.'), ratio: '3/4', eyebrow: x.brand + (x.rate ? ' · 지금 ' + x.rate + '% 할인' : ' · 대표 핫템'), sticker: lineup.length === 0 ? 'HOT' : (x.rate >= 10 ? x.rate + '% OFF' : 'HOT'), headline });
+  }
   // 분위기별
   const MOOD = [['202', '캐주얼'], ['301', '걸리시'], ['205', '미니멀'], ['203', '스트릿'], ['209', '포멀']];
   const moodCats = [];
