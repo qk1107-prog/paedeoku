@@ -49,6 +49,7 @@ module.exports = async function handler(req, res) {
     if (id === "main") out = await buildMain();
     else if (id === "episodes") out = [];
     else if (id === "packs") out = { starter: [], levelup: [] };
+    else if (id === "brands") out = (await row("pdk_brands")) || (await row("brands"));
     else if (SHARED[id]) out = await row(id);
     else { res.statusCode = 400; return res.end("bad id"); }
     if (out == null) throw new Error("empty");
