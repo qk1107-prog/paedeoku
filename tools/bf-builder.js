@@ -45,6 +45,14 @@
   const MOOD = [['202', '캐주얼'], ['301', '걸리시'], ['205', '미니멀'], ['203', '스트릿'], ['209', '포멀']];
   const moodCats = [];
   for (const [sec, mood] of MOOD) { const ids = (await rank(sec, '000', 'AGE_BAND_20')); await fetchInfo(ids); const p = ids.filter((id) => ok(id)).slice(0, 24); await link(p); const items = noRepeat(p.map(item).filter(Boolean)).slice(0, 20); if (items.length >= 8) moodCats.push({ mood, groups: [{ cat: '인기 TOP 20', items }] }); }
+  // 착샷: 대표사진이 제품만 있는 컷이면 상세사진 중 사람이 나온 컷으로 바꾸기
+  {
+    const look = (url) => new Promise((res) => { const im = new Image(); im.crossOrigin = 'anonymous'; im.onload = () => { try { const c = document.createElement('canvas'); c.width = 50; c.height = 60; const x = c.getContext('2d'); x.drawImage(im, 0, 0, 50, 60); const p = x.getImageData(0, 0, 50, 60).data; let skin = 0, n = 0, ew = 0, en = 0; for (let y = 0; y < 60; y++) for (let xx = 0; xx < 50; xx++) { const i = (y * 50 + xx) * 4, r = p[i], g = p[i + 1], b = p[i + 2]; n++; const Y = 0.299 * r + 0.587 * g + 0.114 * b, cb = 128 - 0.169 * r - 0.331 * g + 0.5 * b, cr = 128 + 0.5 * r - 0.419 * g - 0.081 * b; if (Y > 60 && cb > 85 && cb < 125 && cr > 136 && cr < 170) skin++; if (y < 3 || y > 56 || xx < 3 || xx > 46) { en++; if (r > 232 && g > 232 && b > 232) ew++; } } res({ skin: skin / n, white: ew / en }); } catch (e) { res(null); } }; im.onerror = () => res(null); im.src = url; });
+    const all = []; [padding, xmas, teaser].forEach((o) => o.groups.forEach((g) => g.items.forEach((x) => all.push(x))));
+    const ids = [...new Set(all.map((x) => x.i))]; const M = {}; let k = 0;
+    await Promise.all(Array.from({ length: 8 }, async () => { while (k < ids.length) { const id = ids[k++]; try { const d = (await (await fetch('https://goods-detail.musinsa.com/api2/goods/' + id, { credentials: 'include' })).json()).data; const t = await look('https://image.msscdn.net' + d.thumbnailImageUrl); if (t && t.white > 0.8 && t.skin < 0.03) for (const g of (d.goodsImages || []).slice(0, 10)) { const s2 = await look('https://image.msscdn.net' + g.imageUrl); if (s2 && s2.skin >= 0.04 && !(s2.white > 0.8 && s2.skin < 0.06)) { M[id] = 'https://image.msscdn.net' + g.imageUrl; break; } } } catch (e) {} } }));
+    all.forEach((x) => { if (M[x.i]) x.img = M[x.i]; });
+  }
   const out = {
     at: new Date().toISOString(),
     site: { name: '패더쿠의 옷장', brand: '패더쿠', avatar: 'https://paedeoku.vercel.app/img/avatar.jpg', instagram: 'paedeoku', footer: '패더쿠의 옷장 · 패션 할인 소식 제일 빠른 곳', bio: '🔥 무진장 · 무신사 블랙프라이데이 할인 소식 제일 빠른 곳\n남녀 상관없이 지금 제일 핫한 아이템만 골라서 정리했어요\n블프 탭부터 보시고, 카테고리 꿀템도 둘러보세요' },
