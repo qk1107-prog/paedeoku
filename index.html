@@ -105,6 +105,8 @@
     text-transform: uppercase;
     color: var(--fg);
   }
+  #app-root .top-right { display: flex; align-items: center; gap: 8px; }
+  #app-root .yt-link { display: inline-flex; line-height: 0; }
   #app-root .handle {
     color: #a49c8c;
     font-size: 11px;
@@ -417,7 +419,7 @@
   #app-root .cpz-tick-in a b { color: #5B5BF0; margin-right: 3px; }
   #app-root .cpz-tick:hover .cpz-tick-in { animation-play-state: paused; }
   @keyframes cpzTick { from { transform: translateX(0); } to { transform: translateX(-100%); } }
-  #app-root .cpz-hot { position: absolute; left: 8px; top: -1px; font-size: 8.5px; font-weight: 900; color: #fff; background: linear-gradient(135deg, #ff7a2f, #4F4FE0); border-radius: 0 0 5px 5px; padding: 2px 5px 1px; letter-spacing: 0.3px; }
+  #app-root .cpz-hot { position: absolute; left: 8px; top: -1px; font-size: 8.5px; font-weight: 900; color: #fff; background: linear-gradient(135deg, #8C7BFF, #4F4FE0); border-radius: 0 0 5px 5px; padding: 2px 5px 1px; letter-spacing: 0.3px; }
   #app-root .cpz-chip.is-hot { border-color: #ffb08a; box-shadow: 0 0 0 1px rgba(255,90,40,.15), 0 4px 12px rgba(255,80,40,.12); }
   #app-root .cpz-chip.is-hot::before { background: linear-gradient(180deg, #ff9a3d, #4F4FE0); }
   #app-root .cpz-chip.is-hot .cpz-v { margin-top: 8px; }
@@ -692,7 +694,7 @@
   #app-root .sp-chips button.active { background: #26222E; color: #fff; border-color: #26222E; }
   #app-root .sp-chips[hidden] { display: none; }
   #app-root #br-sty button.br-trend { border-color: #ff5a2a; color: #5B5BF0; }
-  #app-root #br-sty button.br-trend.active { background: linear-gradient(135deg, #ff7a2f, #4F4FE0); color: #fff; border-color: transparent; }
+  #app-root #br-sty button.br-trend.active { background: linear-gradient(135deg, #8C7BFF, #4F4FE0); color: #fff; border-color: transparent; }
   #app-root .br-note { margin: 6px 0 2px; font-size: 11px; color: #8a847b; }
   #app-root .br-rank { position: absolute; left: 6px; top: 6px; min-width: 22px; height: 22px; border-radius: 6px; background: #26222E; color: #fff; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; padding: 0 5px; }
   #app-root .br-rank.top { background: #5B5BF0; }
@@ -903,6 +905,7 @@
   #app-root .bf-day.past { opacity: .35; }
   /* 오늘의 꿀템 허브 */
   #app-root .bf-hub { margin: 14px 0 0; }
+  #app-root #bf-topcard { margin: 0 0 14px; }
   #app-root .bf-hub-head { display: flex; align-items: baseline; justify-content: space-between; margin: 0 2px 8px; }
   #app-root .bf-h { margin: 0; font-size: 14.5px; font-weight: 900; letter-spacing: -0.6px; }
   #app-root .bf-h small { font-size: 10px; color: #5B5BF0; font-weight: 800; margin-left: 4px; letter-spacing: 0; }
@@ -916,7 +919,16 @@
   #app-root .bf-tile .c { margin: 6px 0 0; font-size: 11.5px; font-weight: 900; font-variant-numeric: tabular-nums; color: #5B5BF0; letter-spacing: -0.2px; }
   #app-root .bf-tile .c small { display: block; font-size: 8.5px; color: #8a8378; font-weight: 700; letter-spacing: 0; margin-bottom: 1px; }
   #app-root .bf-tile.lock { background: #faf9f7; }
-  #app-root .bf-tile .n { position: absolute; right: 7px; top: 7px; font-size: 8.5px; font-weight: 900; color: #fff; background: #26222E; border-radius: 5px; padding: 2px 5px 1px; }
+  #app-root .bf-hub-big .bf-h { font-size: 19px; }
+  #app-root .bf-hub-big .bf-h small { font-size: 12px; }
+  #app-root .bf-hub-note { margin: -2px 2px 10px; font-size: 12.5px; font-weight: 800; color: #5B5BF0; letter-spacing: -0.3px; }
+  #app-root .bf-hub-big .bf-tile { padding: 14px 11px 12px; border-radius: 14px; border-width: 1.5px; }
+  #app-root .bf-hub-big .bf-tile .e { font-size: 22px; }
+  #app-root .bf-hub-big .bf-tile .t { font-size: 14.5px; margin-top: 8px; }
+  #app-root .bf-hub-big .bf-tile .s { font-size: 10.5px; }
+  #app-root .bf-hub-big .bf-tile .c { font-size: 14px; margin-top: 8px; }
+  #app-root .bf-hub-big .bf-tile .c small { font-size: 9.5px; }
+  #app-root .bf-tile .n { position: absolute; right: 7px; top: 7px; font-size: 8.5px; font-weight: 900; color: #fff; background: #1F1D26; border-radius: 5px; padding: 2px 5px 1px; }
   /* 섹션 공통 */
   #app-root .bf-sec { margin: 18px 0 0; scroll-margin-top: 70px; }
   #app-root .bf-sec-head { display: flex; align-items: baseline; justify-content: space-between; margin: 0 2px 8px; gap: 8px; }
@@ -1025,7 +1037,11 @@
   #app-root .bf-price-note s { text-decoration-color: #5B5BF0; text-decoration-thickness: 1.5px; }
   #app-root .bf-jump { position: sticky; top: 56px; z-index: 5; display: flex; gap: 5px; overflow-x: auto; margin: 14px -16px 0; padding: 8px 16px; background: rgba(255,255,255,.96); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); scrollbar-width: none; }
   #app-root .bf-jump::-webkit-scrollbar { display: none; }
-  #app-root .bf-jump button { flex: none; border: none; background: #f3f1ee; border-radius: 999px; padding: 6px 11px 5px; font-family: inherit; font-size: 11px; font-weight: 800; color: #1F1D26; cursor: pointer; }
+  #app-root .bf-jump button { flex: none; border: none; background: #f3f1ee; border-radius: 999px; padding: 8px 13px 7px; font-family: inherit; font-size: 12.5px; font-weight: 900; color: #1F1D26; cursor: pointer; letter-spacing: -0.3px; }
+  #app-root .bf-jump button.k0 { background: #1F1D26; color: #fff; }
+  #app-root .bf-jump button.k1 { background: #5B5BF0; color: #fff; }
+  #app-root .bf-jump button.k2 { background: #5b2fd6; color: #fff; }
+  #app-root .bf-jump button.k3 { background: #fff; color: #1F1D26; box-shadow: inset 0 0 0 1.5px #1F1D26; }
   #app-root .bf-bens { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
   #app-root .bf-ben { border-radius: 12px; background: #faf9f7; padding: 10px 10px 9px; border: 1px solid transparent; }
   #app-root .bf-ben.on { background: #fff; border-color: #26222E; }
@@ -1202,6 +1218,35 @@
   #app-root .collab-scroll { background: linear-gradient(#26222E, #26222E) 0 3px / 100% 3px no-repeat; background-attachment: local; padding-top: 14px; }
   #app-root .collab-card .cc-sticker { border-radius: 4px 12px 12px 4px; padding-left: 15px; }
   #app-root .collab-card .cc-sticker::before { content: ""; position: absolute; left: 5px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #fff; }
+#app-root .hotz { margin: 4px 0 16px; }
+#app-root .hotz-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 8px; margin: 0 0 8px; }
+#app-root .hotz-title { margin: 0; font-size: 15px; font-weight: 900; letter-spacing: -0.4px; color: #1F1D26; }
+#app-root .hotz-head small { font-size: 10.5px; font-weight: 700; color: #8a847b; }
+#app-root .hotz .cpz-live { vertical-align: 3px; }
+#app-root .hotz .bf-chips { margin: 0 0 10px; padding: 0; flex-wrap: wrap; overflow: visible; gap: 5px; }
+#app-root .hotz-title em { font-style: normal; color: #fff; background: linear-gradient(90deg, #5B5BF0, #8C7BFF); padding: 1px 7px 2px; border-radius: 6px; margin-left: 2px; }
+#app-root .hotz-more { display: block; width: 100%; margin: 10px 0 0; padding: 11px 0; border: 1px solid #1F1D26; border-radius: 10px; background: #fff; font: inherit; font-size: 13px; font-weight: 900; color: #1F1D26; cursor: pointer; }
+#app-root .hotz-more small { font-size: 11px; color: #5B5BF0; margin-left: 2px; }
+#app-root .hotz .bf-chips::-webkit-scrollbar { display: none; }
+#app-root .hotz .bf-chips button { flex: 0 0 auto; }
+#app-root .hotz-sub { margin: -2px 0 8px; font-size: 11.5px; font-weight: 800; color: #5B5BF0; }
+#app-root .hotz .bf-item .cm { color: #5B5BF0; font-weight: 800; font-size: 10.5px; }
+#app-root .hotz-bar { position: relative; height: 2px; margin: 0 0 10px; background: #f1ece6; border-radius: 2px; overflow: hidden; }
+#app-root .hotz-bar i { position: absolute; top: 0; left: -30%; width: 30%; height: 100%; background: linear-gradient(90deg, transparent, #5B5BF0, transparent); animation: hotScan 2.2s linear infinite; }
+@keyframes hotScan { to { left: 100%; } }
+#app-root .hotz-grid > * { position: relative; transition: box-shadow .5s, transform .5s; border-radius: 10px; }
+#app-root .hotz-grid > .hot-on { box-shadow: 0 0 0 2px #5B5BF0, 0 6px 18px rgba(91, 91, 240, .22); transform: translateY(-2px); }
+#app-root .hotz-in > * { animation: hotIn .5s ease both; animation-delay: var(--d, 0ms); }
+@keyframes hotIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { #app-root .hotz-bar i, #app-root .hotz-in > * { animation: none; } #app-root .hotz-grid > .hot-on { transform: none; } }
+
+#app-root .cpz-hint { margin: 0 0 8px; font-size: 11.5px; font-weight: 800; color: #5B5BF0; letter-spacing: -0.2px; }
+
+#app-root #cat-sex.cat-main { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+#app-root #cat-sex.cat-main button { padding: 11px 0; font-size: 14px; font-weight: 900; border-radius: 12px; text-align: center; }
+#app-root #cat-etc { align-items: center; margin-top: 2px; }
+#app-root #cat-etc span { font-size: 11px; font-weight: 800; color: #8a847b; margin-right: 2px; }
+#app-root #cat-etc button { font-size: 11.5px; }
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -1828,6 +1873,56 @@ async function renderPublicSite(root) {
   }
   const cpKind = (c) => (c.k === "C" ? "장바구니" : "상품");
   const cpHotSet = () => { if (!COUPONS || !COUPONS.list) return new Set(); const L = COUPONS.list; const pct = (c) => (/%$/.test(c.v) ? parseFloat(c.v) : 0); const pool = L.slice(0, 60).filter((c) => pct(c) >= 10 || /만원|천원/.test(c.v)); const top = pool.slice().sort((a, b) => (b.bf || 0) - (a.bf || 0) || pct(b) - pct(a) || (b.cnt || 0) - (a.cnt || 0)).slice(0, 6); return new Set(top.map((c) => String(c.no))); };
+  // ---- 대표 브랜드 프리오픈 쿠폰 강조 칸 (타임세일 TOP 10 바로 아래) : 티징 쿠폰이 있는 대표 브랜드만 자동으로 ----
+  function renderSpot(L) {
+    const BR = ["노스페이스", "아디다스", "나이키", "뉴발란스", "어그", "살로몬", "아크테릭스"];
+    const won2 = (n) => Number(n || 0).toLocaleString("ko-KR") + "원";
+    const SP = (() => { try { return ((ADMIN && ADMIN.bf && ADMIN.bf.spot) || {}).brands || []; } catch (e) { return []; } })();
+    const spBlocks = SP.filter((o) => (o.items || []).length >= 3).slice(0, 2).map((o) => `<div class="spz-box">
+        <p class="spz-t">🎟️ ${esc(o.brand)} <em>프리오픈 쿠폰 최대 ${esc(o.max)}%</em><span class="cpz-live"><i></i>LIVE</span></p>
+        <p class="spz-k">~${esc(o.exp || "")} 본편 전까지 · 쿠폰 적용 상품 ${Number(o.total || 0).toLocaleString("ko-KR")}개 중 패딩 ${esc(o.pad || 0)}개</p>
+        <div class="hotz-bar"><i></i></div>
+        <div class="spz-chips">${(o.all || []).length ? `<a class="spz-chip-all" href="#spa=${encodeURIComponent(o.brand)}">전체보기 →</a>` : ""}${(o.coupons || []).map((c) => `<a href="#cp=${esc(c.no)}"><b>${esc(c.v)}</b> 쿠폰템</a>`).join("")}</div>
+        <div class="tsz-scroll">${o.items.map((x) => `<a class="bf-item" href="${esc(safeUrl(x.link) || "#")}" target="_blank" rel="noopener">
+          <div class="im"><img src="${esc(safeImg(x.img))}" loading="lazy" alt="" referrerpolicy="no-referrer"><span class="tg">쿠폰 ${esc(x.p)}%</span></div>
+          <p class="br">${esc(x.brand)}</p><p class="nm">${esc(x.name)}</p>
+          <p class="pt"><s>${esc(won2(x.price))}</s></p>
+          <p class="pr"><i>${esc(x.tot)}%</i>${esc(won2(x.cpn))}</p>
+          <p class="spz-after">쿠폰 적용가 · 지금 ${esc(won2(x.sale))}</p>
+        </a>`).join("")}${(o.all || []).length ? `<a class="spz-endcard" href="#spa=${encodeURIComponent(o.brand)}"><b>전체</b>보기 →</a>` : ""}</div>
+      </div>`).join("");
+    const spHave = new Set(SP.filter((o) => (o.items || []).length >= 3).map((o) => o.brand));
+    const blocks = spBlocks + BR.filter((b) => !spHave.has(b)).map((b) => {
+      const cps = L.filter((c) => c.tz && c.n.includes(b) && !/키즈/.test(c.n) && (c.g || []).length);
+      if (!cps.length) return "";
+      const pct = (c) => (/%$/.test(c.v) ? parseFloat(c.v) : 0);
+      const byV = {}; cps.forEach((c) => { const k = c.v; if (!byV[k] || /프리오픈/.test(c.n)) byV[k] = c; });
+      const chips = Object.values(byV).sort((a, b2) => pct(b2) - pct(a));
+      const goods = {}; cps.forEach((c) => (c.g || []).forEach((g) => { const k = g.l; if (!goods[k] || pct(c) > goods[k].p) goods[k] = { g, p: pct(c), c }; }));
+      const items = Object.values(goods).sort((a, b2) => b2.p - a.p).slice(0, 12);
+      if (items.length < 3) return "";
+      const max = Math.max(...chips.map(pct));
+      const exp = chips[0].exp || "";
+      return `<div class="spz-box">
+        <p class="spz-t">🎟️ ${esc(b)} <em>프리오픈 쿠폰 최대 ${max}%</em><span class="cpz-live"><i></i>LIVE</span></p>
+        <p class="spz-k">~${esc(exp)} 본편 전까지 · 쿠폰 누르면 적용 상품 전체보기</p>
+        <div class="hotz-bar"><i></i></div>
+        <div class="spz-chips">${chips.map((c) => `<a href="#cp=${esc(c.no)}"><b>${esc(c.v)}</b> 쿠폰 적용템 →</a>`).join("")}</div>
+        <div class="tsz-scroll">${items.map(({ g, p }) => { const after = p ? Math.round(g.s * (1 - p / 100) / 100) * 100 : 0; return `<a class="bf-item" href="${esc(curl(g.l) || "#")}" target="_blank" rel="noopener">
+          <div class="im"><img src="${esc("https://image.msscdn.net" + g.i)}" loading="lazy" alt="" referrerpolicy="no-referrer">${p ? `<span class="tg">쿠폰 ${p}%</span>` : ""}</div>
+          <p class="br">${esc(g.b || b)}</p><p class="nm">${esc(g.n)}</p>
+          <p class="pr">${g.r ? `<i>${g.r}%</i>` : ""}${esc(won2(g.s))}</p>
+          ${after ? `<p class="spz-after">쿠폰가 약 ${esc(won2(after))}</p>` : ""}
+        </a>`; }).join("")}</div>
+      </div>`;
+    }).filter(Boolean).slice(0, 2).join("");
+    let box = root.querySelector("#spz");
+    if (!blocks) { if (box) box.remove(); return; }
+    if (!box) { box = document.createElement("section"); box.id = "spz"; box.className = "spz"; }
+    const anchor = root.querySelector("#tsz") || root.querySelector("#cpz");
+    if (anchor && anchor.nextSibling !== box) anchor.after(box);
+    box.innerHTML = blocks;
+  }
   let CP_HOT = new Set();
   const cpChip = (c) => `<a class="cpz-chip k-${esc(c.k)}${CP_HOT.has(String(c.no)) ? " is-hot" : ""}" href="#cp=${esc(c.no)}">${CP_HOT.has(String(c.no)) ? '<span class="cpz-hot">🔥 HOT</span>' : ""}<span class="cpz-k">${c.nw ? '<em class="cpz-new">NEW</em> ' : ""}${c.tz ? '<em class="cpz-bf" style="background:#6a2ff0">티징</em>' : c.bf ? '<em class="cpz-bf">무진장</em>' : cpKind(c)}</span><span class="cpz-v">${esc(c.v)}</span><span class="cpz-n">${esc(c.n)}</span><span class="cpz-m">${esc([c.cond, c.exp ? "~" + c.exp : ""].filter(Boolean).join(" · "))}</span></a>`;
   const cpTime = (iso) => { try { const d = new Date(iso); const k = new Date(d.getTime() + 9 * 3600e3); return `${k.getUTCMonth() + 1}/${k.getUTCDate()} ${String(k.getUTCHours()).padStart(2, "0")}:${String(k.getUTCMinutes()).padStart(2, "0")}`; } catch (e) { return ""; } };
@@ -1838,7 +1933,11 @@ async function renderPublicSite(root) {
     if (COUPONS.on && !CP_PV && Date.now() < CP_GO) { if (!window.__cpGoT) window.__cpGoT = setTimeout(renderCouponStrip, CP_GO - Date.now() + 1500); return; }
     if (!(COUPONS.on || CP_PV)) return;
     CP_HOT = cpHotSet();
-    const L = COUPONS.list;
+    // 유명 브랜드 쿠폰 먼저 (원래 순서는 유지)
+    const CP_FAM = /노스페이스|아디다스|나이키|뉴발란스|어그|살로몬|아크테릭스|푸마|컨버스|반스|닥터마틴|파타고니아|디스커버리|내셔널지오그래픽|컬럼비아|코오롱|아이더|케이투|리바이스|폴로|라코스테|챔피온|커버낫|스파오|무신사 스탠다드|칼하트|디키즈|스투시|아식스|미즈노|오니츠카|팀버랜드|크록스|잔스포츠|이스트팩|캉골|엠엘비|후아유|지오다노|탑텐|에잇세컨즈|마인드브릿지|드로우핏|수아레|토피|쿠어|인사일런스|예일|마리떼|마뗑킴|디스이즈네버댓|노매뉴얼|락피쉬|몽벨|네파|블랙야크|스노우피크|데상트|르꼬끄|휠라|리복|언더아머|유니클로|자라|캘빈클라인|타미|게스|랭글러/;
+    const CP_TOP = /노스페이스|아디다스|나이키|뉴발란스|어그|살로몬|아크테릭스|파타고니아|칼하트|스투시/;
+    const cpPri = (n) => (CP_TOP.test(n) ? 2 : CP_FAM.test(n) ? 1 : 0);
+    const L = COUPONS.list.map((c, i) => [c, i]).sort((a, b) => cpPri(b[0].n) - cpPri(a[0].n) || a[1] - b[1]).map((x) => x[0]);
     const hot = L.filter((c) => CP_HOT.has(String(c.no)));
     const rest = L.filter((c) => !CP_HOT.has(String(c.no)));
     const nw = L.filter((c) => c.nw);
@@ -1846,11 +1945,12 @@ async function renderPublicSite(root) {
     const tzDemo = !tz.length && CP_PV && Date.now() < Date.parse("2026-11-20T10:00:00Z");
     if (tzDemo) { const b = L.find((c) => c.bf) || L[0]; tz = [Object.assign({}, b, { tz: true, nw: true, n: "[예시] 무진장 티징 전용 " + (b.k === "CART" ? "장바구니" : "상품") + " 쿠폰" })]; }
     const tickItems = [...tz, ...hot, ...nw.filter((c) => !CP_HOT.has(String(c.no))), ...rest].slice(0, 12);
-    box.innerHTML = `<div class="cpz-head"><p class="cpz-title"><span class="cpz-fire">🔥</span> 실시간 지금 쓰기 좋은 쿠폰<span class="cpz-live"><i></i>LIVE</span><small>실시간 업데이트 · ${esc(cpTime(COUPONS.at))} 확인</small></p><a class="cpz-more" href="#cps">전체보기</a></div>
+    box.innerHTML = `<div class="cpz-head"><p class="cpz-title"><span class="cpz-fire">🔥</span> 실시간 지금 쓰기 좋은 쿠폰<span class="cpz-live"><i></i>LIVE</span><small>실시간 트래킹 · ${esc(cpTime(COUPONS.at))} 확인</small></p><a class="cpz-more" href="#cps">전체보기</a></div><p class="cpz-hint">👇 쿠폰을 클릭하면 사용 가능한 제품 리스트로 넘어갑니다</p><div class="hotz-bar"><i></i></div>
       <div class="cpz-tick"><div class="cpz-tick-in">${tickItems.map((c) => `<a href="#cp=${esc(c.no)}"><b>${c.nw ? "NEW" : "🔥"} ${esc(c.v)}</b>${esc(c.n)}</a>`).join("")}</div></div>
       ${tz.length ? `<p class="cpz-sub">⚡ 티징 전용 쿠폰 <small>${tzDemo ? "미리보기 예시 · 19시에 실제 쿠폰으로 바뀌어요" : "11/20 19시 ~ 11/22 본편 전까지"}</small></p><div class="cpz-scroll cpz-one">${tz.map(cpChip).join("")}</div><p class="cpz-sub">🔥 지금 쓰기 좋은 쿠폰</p>` : ""}
       <div class="cpz-scroll">${[...hot, ...rest].filter((c) => !c.tz).slice(0, 40).map(cpChip).join("")}</div>`;
     box.dataset.ready = "1";
+    try { renderSpot(L); } catch (e) {}
     const t = root.querySelector("nav.tabs button.active");
     box.hidden = false;
   }
@@ -1894,11 +1994,56 @@ async function renderPublicSite(root) {
     bd.querySelector("#cpz-all").addEventListener("click", (e) => { if (e.target.closest('a[href^="#cp="]')) cpFromList = true; });
     draw();
   }
+  async function openSpotAll(brand, tries) {
+    tries = tries || 0;
+    const o = (() => { try { return (((ADMIN && ADMIN.bf && ADMIN.bf.spot) || {}).brands || []).find((x) => x.brand === brand); } catch (e) { return null; } })();
+    if (!o || !(o.all || []).length) { if (tries < 16 && location.hash.startsWith("#spa=")) { setTimeout(() => openSpotAll(brand, tries + 1), 500); return; } history.replaceState(null, "", location.pathname + location.search); return; }
+    const won2 = (n) => Number(n || 0).toLocaleString("ko-KR") + "원";
+    const card = (x) => `<a class="bf-item" href="${esc(curl(x.l))}" target="_blank" rel="noopener">
+          <div class="im"><img src="${esc(safeImg(x.img))}" loading="lazy" alt="" referrerpolicy="no-referrer"><span class="tg">쿠폰 ${esc(x.p)}%</span></div>
+          <p class="br">${esc(x.brand)}</p><p class="nm">${esc(x.name)}</p>
+          <p class="pt"><s>${esc(won2(x.price))}</s></p>
+          <p class="pr"><i>${esc(x.tot)}%</i>${esc(won2(x.cpn))}</p>
+          <p class="spz-after">쿠폰 적용가 · 지금 ${esc(won2(x.sale))}</p>
+        </a>`;
+    // 같은 제품 다른 색은 하나만(할인 큰 쪽), 신발·가방은 '그 외'로
+    const nk = (n) => String(n).replace(/^[A-Z]{2}[A-Z0-9]{5,}\s*/, "").replace(/\((RDS|공용)\)/g, "").replace(/[\s_\-\/]+[A-Z][A-Z_\s]*$/, "").replace(/\s+/g, "");
+    const GOODS = /츄카|뮬|부티|부츠|슬리퍼|슬립온|슈즈|스니커즈|백팩|버킷|토트|숄더|크로스|가방|파우치|멀티팩|팩 |장갑|머플러|비니|모자|햇|캡|팬츠|바지/;
+    const seen = new Set();
+    const ALL = o.all.map((x) => (GOODS.test(x.name) ? Object.assign({}, x, { k: 2 }) : x)).sort((a, b2) => b2.tot - a.tot).filter((x) => { const kk = nk(x.name); if (seen.has(kk)) return false; seen.add(kk); return true; });
+    const secs = [["🧥 패딩", 0], ["🧶 자켓 · 플리스", 1], ["👕 그 외 (신발·가방 등)", 2]].map(([t, k]) => { const L2 = ALL.filter((x) => x.k === k); return L2.length ? `<div class="ep-brand-row"><p class="ep-brand-name" style="margin:0 16px 8px">${t} <small style="color:#999;font-weight:700">${L2.length}</small></p><div class="spz-grid">${L2.map(card).join("")}</div></div>` : ""; }).join("");
+    cpOverlay("spa" + brand, brand + " 프리오픈 쿠폰템", `
+      <div class="cpz-hero"><b>최대 ${esc(o.max)}%</b><p>${esc(brand)} 무진장 프리오픈 쿠폰템 전체</p><small>~${esc(o.exp || "")} 본편 전까지 · 할인 큰 순 · 같은 제품 다른 색은 하나만</small></div>
+      <div class="spz-tabs">${(o.coupons || []).map((x) => `<a href="#cp=${esc(x.no)}"><b>${esc(x.v)}</b> 쿠폰만</a>`).join("")}</div>
+      <div id="ep-sections">${secs}</div>
+      <p class="ep-note">상품 페이지에서 '쿠폰 받기'를 누르면 바로 적용돼요. 쿠폰 적용가는 지금 판매가 기준으로 계산한 값이에요.</p>`);
+  }
   async function openCoupon(no) {
     const C = await loadCoupons();
     const c = C && (C.list || []).find((x) => String(x.no) === String(no));
     if (!c) { history.replaceState(null, "", location.pathname + location.search); return; }
     const items = (c.g || []).map((g) => ({ brand: g.b, product_name: g.n, curator_url: curl(g.l), image_url: "https://image.msscdn.net" + g.i }));
+    // 대표 브랜드 프리오픈 쿠폰이면: 그 쿠폰이 붙는 상품을 패딩부터 쿠폰 적용가로 한 번에
+    // 노스페이스처럼 프리오픈 칸이 있는 브랜드 쿠폰(티징 전용 쿠폰 포함)은 그 쿠폰이 실제로 붙는 상품 전체를
+    const spB = (() => { try { return (((ADMIN && ADMIN.bf && ADMIN.bf.spot) || {}).brands || []).find((o) => (o.all || []).length && ((o.coupons || []).some((x) => String(x.no) === String(no)) || o.all.some((x) => (x.cs || []).map(String).includes(String(no))) || (c.n || "").includes(o.brand))); } catch (e) { return null; } })();
+    const spL = spB ? (spB.all.some((x) => (x.cs || []).map(String).includes(String(no))) ? spB.all.filter((x) => (x.cs || []).map(String).includes(String(no))) : spB.all.filter((x) => Number(x.p) === parseFloat(c.v))) : [];
+    if (spL.length >= 3) {
+      const won2 = (n) => Number(n || 0).toLocaleString("ko-KR") + "원";
+      const card = (x) => `<a class="bf-item" href="${esc(curl(x.l))}" target="_blank" rel="noopener">
+          <div class="im"><img src="${esc(safeImg(x.img))}" loading="lazy" alt="" referrerpolicy="no-referrer"><span class="tg">쿠폰 ${esc(x.p)}%</span></div>
+          <p class="br">${esc(x.brand)}</p><p class="nm">${esc(x.name)}</p>
+          <p class="pt"><s>${esc(won2(x.price))}</s></p>
+          <p class="pr"><i>${esc(x.tot)}%</i>${esc(won2(x.cpn))}</p>
+          <p class="spz-after">쿠폰 적용가 · 지금 ${esc(won2(x.sale))}</p>
+        </a>`;
+      const secs = [["🧥 패딩", 0], ["🧶 자켓 · 플리스", 1], ["👕 그 외", 2]].map(([t, k]) => { const L2 = spL.filter((x) => x.k === k); return L2.length ? `<div class="ep-brand-row"><p class="ep-brand-name" style="margin:0 16px 8px">${t}</p><div class="spz-grid">${L2.map(card).join("")}</div></div>` : ""; }).join("");
+      cpOverlay("cp" + c.no, c.n, `
+      <div class="cpz-hero k-${esc(c.k)}"><b>${esc(c.v)}</b><p>${esc(c.n)}</p><small>${esc([cpKind(c) + " 쿠폰", c.cond, c.exp ? c.exp + "까지" : "", c.cnt ? "적용 상품 " + Number(c.cnt).toLocaleString("ko-KR") + "개" : ""].filter(Boolean).join(" · "))}</small></div>
+      <div class="spz-tabs">${(spB.coupons || []).map((x) => `<a href="#cp=${esc(x.no)}" class="${String(x.no) === String(no) ? "on" : ""}"><b>${esc(x.v)}</b> 쿠폰</a>`).join("")}</div>
+      <div id="ep-sections">${secs}</div>
+      <p class="ep-note">상품 페이지에서 '쿠폰 받기'를 누르면 바로 적용돼요. 쿠폰 적용가는 지금 판매가 기준으로 계산한 값이에요.</p>`);
+      return;
+    }
     cpOverlay("cp" + c.no, c.n, `
       <div class="cpz-hero k-${esc(c.k)}"><b>${esc(c.v)}</b><p>${esc(c.n)}</p><small>${esc([cpKind(c) + " 쿠폰", c.cond, c.exp ? c.exp + "까지" : "", c.cnt ? "적용 상품 " + Number(c.cnt).toLocaleString("ko-KR") + "개" : ""].filter(Boolean).join(" · "))}</small></div>
       <div id="ep-sections"><div class="ep-brand-row"><p class="ep-brand-name" style="margin:0 16px 8px">이 쿠폰으로 제일 많이 사는 상품</p><div class="ep-prod-grid">${items.map(productCardHtml).join("")}</div></div></div>
@@ -1978,11 +2123,11 @@ async function renderPublicSite(root) {
   }
   // 성별·나이대별 스타터팩/레벨업 팩 (site_data id='packs' = {starter:{M:{"20대":[{cat,sets}]}}, levelup:{...}})
   let PACKS = null, packsP = null;
-  const PSEL = (() => { try { const v = JSON.parse(localStorage.getItem("pdk_psel") || "{}"); return { sex: v.sex === "F" ? "F" : "M", age: ["10대", "20대", "30대"].includes(v.age) ? v.age : "20대" }; } catch (e) { return { sex: "M", age: "20대" }; } })();
+  const PSEL = (() => { try { const v = JSON.parse(localStorage.getItem("pdk_psel") || "{}"); return { sex: v.sex === "M" ? "M" : "F", age: ["10대", "20대", "30대"].includes(v.age) ? v.age : "20대" }; } catch (e) { return { sex: "F", age: "20대" }; } })();
   const savePsel = () => { try { localStorage.setItem("pdk_psel", JSON.stringify(PSEL)); } catch (e) {} };
   function loadPacks() {
     if (PACKS) return Promise.resolve(PACKS);
-    if (!packsP) packsP = sdRow("packs").then(({ data }) => (PACKS = (data && data.value) || null)).catch(() => null).finally(() => { if (!PACKS) packsP = null; });
+    if (!packsP) packsP = sdRow("packs").then(({ data }) => (PACKS = (data && data.value && data.value.ready) ? data.value : null)).catch(() => null).finally(() => { if (!PACKS) packsP = null; });
     return packsP;
   }
   const OUTER_CATS = ["코트", "패딩", "자켓", "MA-1"];
@@ -2006,7 +2151,7 @@ async function renderPublicSite(root) {
     const existing = root.querySelector("#ep-backdrop");
     if (existing && existing.dataset.ep === (lv ? "lp-" : "sp-") + key) return;
     if (existing) existing.remove();
-    const items = (st.items || []).map((it) => ({ brand: it.brand, product_name: (it.role ? `[${it.role}] ` : "") + it.name, curator_url: it.link, image_url: it.img }));
+    const items = (st.items || []).map((it) => ({ brand: it.brand, product_name: (it.role ? `[${it.role}] ` : "") + it.name, curator_url: it.link, image_url: it.flat || it.img }));
     const board = safeImg(st.board);
     const holder = document.createElement("div");
     holder.innerHTML = `
@@ -2117,6 +2262,7 @@ async function renderPublicSite(root) {
     else if (location.hash === "#lu") openLineup();
     else if (location.hash === "#cps") openCoupons();
     else if (/^#cp=\d+/.test(location.hash)) openCoupon(location.hash.slice(4));
+    else if (/^#spa=/.test(location.hash)) openSpotAll(decodeURIComponent(location.hash.slice(5)));
     else if (/^#br=/.test(location.hash)) openCat("br:" + decodeURIComponent(location.hash.slice(4)));
     else if (cm) openCat(cm[0].startsWith("#ca=") ? decodeURIComponent(cm[1]) : cm[1]);
     else closeEpisode();
@@ -2280,7 +2426,7 @@ async function renderPublicSite(root) {
     <header class="head">
       <div class="top-bar">
         <p class="brand" id="brand-home-2" style="cursor:pointer;">${esc(site.brand)}</p>
-        <a class="handle" id="ig-link" href="https://instagram.com/${encodeURIComponent(site.instagram || "")}" target="_blank" rel="noopener noreferrer">@${esc(site.instagram)}</a>
+        <div class="top-right"><a class="handle" id="ig-link" href="https://instagram.com/${encodeURIComponent(site.instagram || "")}" target="_blank" rel="noopener noreferrer">@${esc(site.instagram)}</a></div>
       </div>
       <div class="profile-row">
         <div class="avatar-ring" id="brand-home" style="cursor:pointer;">
@@ -2298,7 +2444,7 @@ async function renderPublicSite(root) {
     ${BF_ON ? `<div class="bf-mini"><button type="button" id="bf-mini"><span class="l"><b>🔥 무진장 블프</b>쿠폰·특가·꿀템 한 번에 정리</span><span class="r"><span id="bf-mini-cd"></span> →</span></button></div>` : ""}
 
     <div class="collab-section">
-      <div class="collab-head"><p class="collab-label">옷장에 걸린 LINE UP</p><a class="lu-more" href="#lu">전체보기 →</a></div>
+      <div class="collab-head"><p class="collab-label">LINE UP</p><a class="lu-more" href="#lu">전체보기 →</a></div>
       <div class="collab-scroll" id="collab-scroll">
         ${collabs.map((c) => `
           <a class="collab-card" style="--collab-pop:${esc(c.pop)}; aspect-ratio:${esc(c.ratio || "4/5")};" ${c.look ? `href="#look=${esc(c.look)}"` : `href="${esc(safeUrl(c.link) || "#")}" target="_blank" rel="noopener"`}>
@@ -2321,9 +2467,9 @@ async function renderPublicSite(root) {
 
 
     <nav class="tabs">
-      ${BF_ON ? `<button data-tab="bf">무진장 블프</button>` : ""}
-      ${BR_ON ? `<button data-tab="brands">나이대별 브랜드</button>` : ""}
-      <button data-tab="cats">카테고리 꿀템</button>
+      ${BF_ON ? `<button data-g="bf">무진장 블프</button>` : ""}
+      <button data-g="age">나이대별<i class="nv-dot"></i></button>
+      <button data-g="pack">코디 팩<i class="nv-dot"></i></button>
     </nav>
 
     <section class="cpz" id="cpz" hidden></section>
@@ -2347,6 +2493,7 @@ async function renderPublicSite(root) {
       </div>
     </section>` : ""}
 
+    <div class="subbar" id="subbar" hidden></div>
     <div class="wrap" id="tab-viewport">
       <div class="tab-slider" id="tab-slider">
       ${BF_ON ? `<section id="tab-bf" class="section${BF_LOCKED ? " is-locked" : ""}"><div class="bf-zone" id="bf-zone"></div>${BF_LOCKED ? `<div class="bf-lock" id="bf-lock"><div class="bf-lock-card"><div class="bf-lock-ic">🔒</div><div class="bf-lock-k">무진장 블프 쿠폰·특가·꿀템 총정리</div><div class="bf-lock-t">11월 20일(금) 오후 7시 공개</div><div class="bf-lock-cd"></div><div class="bf-lock-s">공개되면 이 탭에서 가장 빠르게 볼 수 있어요</div></div><div class="bf-lock-card"><div class="bf-lock-ic">🔒</div><div class="bf-lock-k">무진장 블프 쿠폰·특가·꿀템 총정리</div><div class="bf-lock-t">11월 20일(금) 오후 7시 공개</div><div class="bf-lock-cd"></div><div class="bf-lock-s">공개되면 이 탭에서 가장 빠르게 볼 수 있어요</div></div></div>` : ""}</section>` : ""}
@@ -2373,31 +2520,32 @@ async function renderPublicSite(root) {
       </section>
       ${BR_ON ? `
       <section id="tab-brands" class="section">
-        <div class="sp-chips" id="br-sex" hidden><button type="button" data-v="F" class="active">시스터</button></div>
+        <div class="sp-chips" id="br-sex"><button type="button" data-v="F" class="active">시스터</button><button type="button" data-v="M">브로</button></div>
         <div class="sp-chips" id="br-age"><button type="button" data-v="10대">10대</button><button type="button" data-v="20대" class="active">20대</button><button type="button" data-v="30대">30대</button></div>
         <div class="sp-chips" id="br-sty"></div>
         <div id="br-list"><p class="rec-loading">불러오는 중…</p></div>
       </section>` : ""}
 
       <section id="tab-cats" class="section">
-        <div class="sp-chips" id="cat-sex" hidden><button type="button" data-s="F" class="active">시스터</button></div>
+        <div class="sp-chips cat-main" id="cat-sex"><button type="button" data-s="F" class="active">🙋‍♀️ 시스터</button><button type="button" data-s="">🔥 전체 인기</button><button type="button" data-s="M">🙋‍♂️ 브로</button></div>
         <div class="sp-chips" id="cat-age"><button type="button" data-a="10대">10대</button><button type="button" data-a="20대" class="active">20대</button><button type="button" data-a="30대">30대</button></div>
+        <div class="sp-chips cat-etc" id="cat-etc"><span>남녀 공용</span><button type="button" data-s="acc">액세서리</button><button type="button" data-s="shoe">신발</button><button type="button" data-s="bag">가방</button></div>
         <div id="cat-list"></div>
       </section>
 
-      <section id="tab-mood" class="section-off" hidden>
+      <section id="tab-mood" class="section">
         <div class="sp-chips" id="mood-chips"></div>
         <div id="mood-list"></div>
       </section>
 
-      <section id="tab-starter" class="section-off" hidden>
+      <section id="tab-starter" class="section">
         <p class="tab-intro">실패 없는 기본 세트 — 아우터·상의·하의·신발 한 번에</p>
         <div class="sp-chips" id="sp-chips"></div>
         <div id="sp-list"></div>
       </section>
 
-      <section id="tab-levelup" class="section-off" hidden>
-        <p class="tab-intro">스타터팩 다음 단계 — 무신사 스냅 인기 코디 그대로, 단가 조금 올린 퀄리티 세트</p>
+      <section id="tab-levelup" class="section">
+        <p class="tab-intro">기본템이 준비됐다면, 다음은 퀄리티 좋은 코디로</p>
         <div class="sp-chips" id="lp-chips"></div>
         <div id="lp-list"></div>
       </section>
@@ -2434,11 +2582,13 @@ async function renderPublicSite(root) {
     // ---- 블프 직전가 비교 ----
     const gidOf = (p) => { const m = String((p && p.img) || "").match(/\/(\d{5,9})\/(?:detail_)?\d{5,9}_/); return m ? m[1] : (p && p.id ? String(p.id) : ""); };
     const PRE_SNAPS = (BFD.pre && BFD.pre.snaps) || {};
-    const PRE_KEY = Object.keys(PRE_SNAPS).filter((k) => k <= "2026-11-20").sort().pop() || "";
+    // 본편(11/22 19시) 뒤에는 11/21까지 적어둔 가격도 직전가로 써요 (꿀템·타임세일 상품까지 비교되게)
+    const PRE_CUT = Date.now() >= Date.UTC(2026, 10, 22, 10, 0) ? "2026-11-21" : "2026-11-20";
+    const PRE_KEY = Object.keys(PRE_SNAPS).filter((k) => k <= PRE_CUT).sort().pop() || "";
     // 블프 직전가: 11/20 이전 스냅샷들 중 상품별 가장 낮은 값 (블프 직전에 가격 올린 걸 걸러내요)
     const PRE = (() => {
       const o = {};
-      Object.keys(PRE_SNAPS).filter((k) => k <= "2026-11-20").forEach((k) => {
+      Object.keys(PRE_SNAPS).filter((k) => k <= PRE_CUT).forEach((k) => {
         const s = PRE_SNAPS[k] || {};
         Object.keys(s).forEach((id) => { const v = s[id]; if (!v || !v[0]) return; if (!o[id] || Number(v[0]) < Number(o[id][0])) o[id] = [v[0], Math.max(Number(v[1] || 0), Number((o[id] && o[id][1]) || 0))]; });
       });
@@ -2769,17 +2919,110 @@ async function renderPublicSite(root) {
     }
 
     function tile(id, e, t, sub, cdHtml, lock, count) {
-      return `<button type="button" class="bf-tile${lock ? " lock" : ""}" data-go="${id}">${count ? `<span class="n">${count}</span>` : ""}<div class="e">${e}</div><p class="t">${t}</p><p class="s">${sub}</p><p class="c">${cdHtml}</p></button>`;
+      return `<button type="button" class="bf-tile${lock ? " lock" : ""}" data-go="${id}"><div class="e">${e}</div><p class="t">${t}</p><p class="s">${sub}</p><p class="c">${cdHtml}</p></button>`;
     }
     function navSec(live) {
       const MC = BFD.mycart || {}; const mcOn = MC.on && (MC.items || []).length && (!MC.from || nowFn() >= Date.parse(MC.from) || preview);
       const L = live ? [...(mcOn ? [["bf-mycart", "🛒 패더쿠 장바구니"]] : []), ["bf-sig", "시그니처특가"], ["bf-pad", "블프 겨울 준비"], ["bf-hot", "하루특가"], ["bf-brand", "브랜드특가"], ["bf-bday", "브랜드데이"],  ["bf-benefit", "쿠폰 정리"], ["bf-best", "작년 BEST"], ["bf-live", "라이브"]]
-        : [["bf-tease", "⚡ 프리오픈"], ["bf-pad", "블프 겨울 준비"], ["bf-sig", "시그니처특가"], ["bf-bday", "브랜드특가"],  ["bf-benefit", "쿠폰 정리"], ["bf-best", "작년 BEST"], ["bf-tips", "활용법"], ["bf-live", "라이브"]];
-      return `<div class="bf-jump">${L.map(([id, t]) => `<button type="button" data-go="${id}">${t}</button>`).join("")}</div>`;
+        : [["bf-pad", "🧥 블프 겨울 준비"], ["bf-sig", "✨ 시그니처특가"], ["bf-tease", "⚡ 프리오픈"], ["bf-bday", "🏷️ 브랜드특가"],  ["bf-benefit", "쿠폰 정리"], ["bf-best", "작년 BEST"], ["bf-tips", "활용법"], ["bf-live", "라이브"]];
+      return `<div class="bf-jump">${L.map(([id, t], i) => `<button type="button" data-go="${id}"${i < 4 ? ` class="k${i}"` : ""}>${t}</button>`).join("")}</div>`;
     }
 
     let phase = "";
+    // ---- 실시간 제일 인기 있는 아이템 (쿠폰 줄 바로 아래, main.bf.hot = {at, cats:[{cat, items}]}) ----
+    // ---- 실시간 지금 타임세일 중 꿀템 (쿠폰 줄 바로 아래 한 줄, main.bf.ts = {at, items}) ----
+    let tsOpen = false;
+    function renderTs() {
+      const T = BFD.ts || {}; const now = nowFn();
+      // 블프 보고방이 매시 정각 main.bf.dm 에 올린 목록(2시간 안)이면 그것만 순서 그대로, 아니면 bf.ts(자동 수집)로 대신
+      const DM = BFD.dm || {}; const dmFresh = !!(DM.at && (DM.items || []).length && now - Date.parse(DM.at) < 2 * 36e5);
+      const SRC = dmFresh ? DM : T;
+      // 프리오픈 쿠폰 칸에 나오는 브랜드(노스페이스 등)는 그 칸으로 몰아서 여기선 뺌 (순서는 그대로)
+      const spOut = new Set(((BFD.spot || {}).brands || []).filter((o) => (o.items || []).length >= 3).map((o) => o.brand));
+      const seenTs = new Set();
+      const items = (SRC.items || []).filter((p) => { if (!p || !p.link || (p.end && p.end <= now) || seenTs.has(p.link) || spOut.has(p.brand)) return false; seenTs.add(p.link); return true; }).slice(0, 50);
+      let box = root.querySelector("#tsz");
+      if (items.length < 3 || now >= T_END) { if (box) box.remove(); return; }
+      const cp = root.querySelector("#cpz");
+      if (!box) { box = document.createElement("section"); box.id = "tsz"; box.className = "tsz"; box.addEventListener("click", (e) => { if (e.target.closest("[data-tsmore]")) { tsOpen = !tsOpen; renderTs(); if (!tsOpen) box.scrollIntoView({ block: "start" }); } }); }
+      if (cp) { if (cp.nextSibling !== box) cp.after(box); } else if (!box.parentNode) { const bz = root.querySelector("#tab-bf"); if (bz) bz.prepend(box); }
+      const won = (n) => Number(n || 0).toLocaleString("ko-KR") + "원";
+      const endTxt = (t) => { if (!t) return "타임세일"; const k = kp(t); const h = Math.round((t - now) / 36e5); return h < 24 ? `⏰ ${h < 1 ? "곧" : h + "시간 뒤"} 마감` : `~${k.m}/${k.d} ${k.h}시`; };
+      const card = (p) => {
+        const kind = p.kind || endTxt(p.end);
+        const fire = Number(p.hot) >= 2 ? " 🔥🔥" : Number(p.hot) === 1 ? " 🔥" : "";
+        const sale = Number(p.sale) || 0, price = Number(p.price) || 0, rate = Number(p.rate) || 0;
+        const isCp = /쿠폰/.test(p.kind || "");
+        const img = safeImg(p.img);
+        return `<a class="bf-item tsc" href="${esc(safeUrl(p.link) || "#")}" target="_blank" rel="noopener">
+          <div class="im">${img ? `<img src="${esc(img)}" loading="lazy" alt="" referrerpolicy="no-referrer">` : ""}<span class="tg">${esc(kind + fire)}</span>${p.soon ? `<span class="tsc-soon">⚡품절임박</span>` : ""}</div>
+          <p class="br">${esc(p.brand)}</p><p class="nm">${esc(p.name)}</p>
+          ${price > sale ? `<p class="pt"><s>${esc(won(price))}</s></p>` : ""}
+          ${isCp ? `<p class="tsc-cp">쿠폰 적용가 <b>${esc(won(sale))}</b>${rate ? ` <i>(-${esc(rate)}%)</i>` : ""}</p>` : `<p class="pr">${rate ? `<i>${esc(rate)}%</i>` : ""}${esc(won(sale))}</p>`}
+        </a>`;
+      };
+      const shown = tsOpen ? items : items.slice(0, 20);
+      box.innerHTML = `<div class="hotz-head"><p class="hotz-title">⏰ 실시간 <em class="ts-em">타임세일·프리쿠폰 꿀템</em><span class="cpz-live"><i></i>LIVE</span></p><small class="tsz-ago"></small>${items.length > 20 || tsOpen ? `<button type="button" class="tsz-more" data-tsmore="1">${tsOpen ? "접기 ▲" : "전체보기 ▼"}</button>` : ""}</div>
+        <div class="hotz-bar"><i></i></div>
+        <div class="${tsOpen ? "bf-grid" : "tsz-scroll"}">${shown.map(card).join("")}${!tsOpen && items.length > 20 ? `<button type="button" class="spz-endcard" data-tsmore="1"><b>+${items.length - 20}</b>전체보기 →</button>` : ""}</div>`;
+      const el = box.querySelector(".tsz-ago"), t = Date.parse(SRC.at || "");
+      if (el && t) { const k = kp(t); el.textContent = `${k.h}시 ${String(k.mi).padStart(2, "0")}분 업데이트 · 품절되면 끝`; }
+    }
+    let hotView = -1, hotOpen = false;
+    function renderHot() {
+      const H = BFD.hot || {}; const cats = (H.cats || []).filter((c) => c && (c.items || []).length);
+      let box = root.querySelector("#hotz");
+      if (!cats.length || nowFn() >= T_END) { if (box) box.remove(); return; }
+      const cp = root.querySelector("#cpz");
+      if (!box) { box = document.createElement("section"); box.id = "hotz"; box.className = "hotz"; box.addEventListener("click", (e) => { const m = e.target.closest("[data-hmore]"); if (m) { hotOpen = !hotOpen; renderHot(); if (!hotOpen) box.scrollIntoView({ block: "start" }); return; } const b = e.target.closest("[data-hv]"); if (!b) return; hotView = Number(b.dataset.hv); hotOpen = false; renderHot(); }); }
+      const anchor = root.querySelector("#spz") || root.querySelector("#tsz") || cp;
+      if (anchor && anchor.nextSibling !== box) anchor.after(box);
+      else if (!cp && !box.parentNode) { const bz = root.querySelector("#tab-bf"); if (bz) bz.prepend(box); }
+      // 순위·출처 표시 없이 카테고리를 섞어서 (1등끼리 먼저, 같은 브랜드 연속 X)
+      const mix = []; for (let r = 0; r < 4; r++) cats.forEach((c) => { if (c.items[r]) mix.push(c.items[r]); });
+      for (let i = 1; i < mix.length; i++) if (mix[i].brand && mix[i].brand === mix[i - 1].brand) { const j = mix.findIndex((x, k) => k > i && x.brand !== mix[i - 1].brand); if (j > 0) [mix[i], mix[j]] = [mix[j], mix[i]]; }
+      // 할인 없는 상품 = 예상 할인율 (브랜드 무진장 할인율 → 없으면 같은 카테고리 할인 상품 중간값 → 전체 중간값)
+      const nb = (x) => String(x || "").toLowerCase().replace(/[\s()\[\]]/g, "");
+      const BR = {}; [...((BFD.teaser || {}).brands || []), ...(BFD.sigBrands || [])].forEach((b) => { const r = Number(b.rate) || 0; if (b.brand && r > (BR[nb(b.brand)] || 0)) BR[nb(b.brand)] = r; });
+      const med = (a) => { a = a.filter((x) => x > 0).sort((x, y) => x - y); return a.length ? a[Math.floor(a.length / 2)] : 0; };
+      const allMed = med(cats.flatMap((c) => c.items.map((x) => Number(x.rate) || 0)));
+      const expOf = (p, c) => BR[nb(p.brand)] || (c ? med(c.items.map((x) => Number(x.rate) || 0)) : 0) || allMed;
+      const catOf = new Map(); cats.forEach((c) => c.items.forEach((x) => catOf.set(x, c)));
+      const rise = (H.rise || []).filter((x) => x && x.link);
+      if (hotView === -2 && !rise.length) hotView = -1;
+      const full = (hotView === -2 ? rise : hotView < 0 || !cats[hotView] ? mix : cats[hotView].items);
+      const LIM = hotView >= 0 ? 6 : 8, list = (hotOpen ? full : full.slice(0, LIM)).map((p) => { const r = Number(p.price) > Number(p.sale) ? Number(p.rate) || 0 : 0, e = r > 0 ? 0 : expOf(p, catOf.get(p)); return Object.assign({}, p, { tag: e ? `예상 ~${e}%` : "", comment: (p.w || []).length ? "👀 " + p.w.join(" · ") : "" }); });
+      const sig = (H.at || "") + hotView + list.length;
+      const fresh = box.dataset.sig !== sig; box.dataset.sig = sig;
+      box.innerHTML = `<div class="hotz-head"><p class="hotz-title">🔥 지금 가장 핫한 <em>아이템 중 꿀템</em><span class="cpz-live"><i></i>LIVE</span></p><small class="hotz-ago" data-hotat="${esc(H.at || "")}"></small></div>
+        <div class="hotz-bar"><i></i></div>
+        <div class="bf-chips"><button type="button" data-hv="-1" class="${hotView === -1 ? "active" : ""}">🔥 실시간 HOT</button>${rise.length ? `<button type="button" data-hv="-2" class="${hotView === -2 ? "active" : ""}">📈 급상승</button>` : ""}${cats.map((c, i) => `<button type="button" data-hv="${i}" class="${hotView === i ? "active" : ""}">${esc(c.cat)}</button>`).join("")}</div>
+        ${hotView === -2 ? `<p class="hotz-sub">📈 지금 갑자기 많이 찾는 상품</p>` : ""}${hotView >= 0 && cats[hotView] ? `<p class="hotz-sub">${esc((cats[hotView].grp ? cats[hotView].grp + " · " : "") + cats[hotView].cat)} 지금 제일 많이 보는 상품</p>` : ""}
+        <div class="bf-grid hotz-grid${fresh ? " hotz-in" : ""}">${list.map((p, i) => itemCard(p, 0).replace(/^(\s*<[a-z]+)/, `$1 style="--d:${Math.min(i, 20) * 50}ms"`)).join("")}</div>
+        ${full.length > LIM ? `<button type="button" class="hotz-more" data-hmore="1">${hotOpen ? "접기 ▲" : `전체보기 ▼ <small>${full.length}개</small>`}</button>` : ""}`;
+      hotAgo();
+      if (!window.__hotTick) {
+        window.__hotTick = 1; let k = 0;
+        setInterval(hotAgo, 20000);
+        setInterval(() => { const cs = root.querySelectorAll("#hotz .hotz-grid > *"); if (!cs.length || document.hidden) return; cs.forEach((c) => c.classList.remove("hot-on")); cs[k++ % cs.length].classList.add("hot-on"); }, 2200);
+      }
+    }
+    function hotAgo() {
+      const el = root.querySelector("#hotz .hotz-ago"); if (!el) return;
+      const t = Date.parse(el.dataset.hotat || ""); if (!t) { el.textContent = "실시간 트래픽 반영 중"; return; }
+      const m = Math.max(0, Math.round((Date.now() - t) / 6e4));
+      el.textContent = `실시간 트래픽 반영 · ${m < 1 ? "방금" : m < 60 ? m + "분 전" : Math.floor(m / 60) + "시간 전"} 업데이트`;
+    }
+    function liftCard() {
+      const card = zone.querySelector(":scope > .bf-card"), bfSec = root.querySelector("#tab-bf");
+      if (!card || !bfSec) return;
+      let top = root.querySelector("#bf-topcard");
+      if (!top) { top = document.createElement("div"); top.id = "bf-topcard"; }
+      if (bfSec.firstChild !== top) bfSec.insertBefore(top, bfSec.firstChild);
+      top.replaceChildren(card);
+    }
     function render() {
+      setTimeout(() => { renderTs(); renderHot(); }, 0);
       const now = nowFn();
       if (now >= T_END) { phase = "end"; zone.innerHTML = `<p class="bf-empty">이번 무진장은 끝났어요. 다음 블프 때 다시 정리할게요!</p>`; return; }
       const flag = preview ? `<p class="bf-preview-flag">● 시안 미리보기 (${preview === "pre" ? "오픈 전" : "오픈 후"})</p>` : "";
@@ -2798,15 +3041,16 @@ async function renderPublicSite(root) {
             ${periodGrid(now)}
             <div class="bf-cdrow"><p><b>${now < T_TEASE ? "티징 오픈까지" : "본편 오픈까지"}</b>${now < T_TEASE ? "11.20(금) 19:00" : "11.22(일) 19:00"}</p><span class="bf-clock">${cd(target)}</span></div>
           </div>
-          <div class="bf-hub">
-            <div class="bf-hub-head"><p class="bf-h">⚡ 매일 꿀템 정리 <small>11.22 OPEN</small></p>${stamp()}</div>
+          <div class="bf-hub bf-hub-big">
+            <div class="bf-hub-head"><p class="bf-h">⚡ 매일 꿀템 정리 <small>11.22 OPEN</small></p></div>
+            <p class="bf-hub-note">🔓 본편 공개(11.22 일 19시)와 동시에 바로 공개돼요 · 지금 준비 완료!</p>
             <div class="bf-tiles">
               ${tile("bf-sig", "🔥", "하루특가", "가성비·가심비 50개씩", cd(T_OPEN), true)}
               ${tile("bf-sig", "✨", "시그니처특가", "미리보기 OPEN", cd(T_OPEN), false, (BFD.sigPreview || []).reduce((a, g) => a + g.items.length, 0))}
               ${tile("bf-bday", "🏷️", "브랜드특가", "브랜드별 꿀템", cd(T_OPEN), false, (BFD.sigBrands || []).length)}
             </div>
           </div>
-          ${navSec(false)}${teaseSec()}${padSec()}${sigSec(false, {})}${brandDaySec(at(2026, 11, 22, 20))}${benefitSec(now)}${bestSec()}${tipsSec()}${liveSec("")}`;
+          ${navSec(false)}${padSec()}${sigSec(false, {})}${teaseSec()}${brandDaySec(at(2026, 11, 22, 20))}${benefitSec(now)}${bestSec()}${tipsSec()}${liveSec("")}`;
       } else {
         phase = "live";
         const day = (BFD.days && BFD.days[key]) || (preview ? (BFD.sample || {}) : {});
@@ -2839,7 +3083,8 @@ async function renderPublicSite(root) {
           <div class="bf-sec" id="bf-brand">${secHead("🏷️", "오늘의 브랜드특가", "브랜드 누르면 꿀템만")}${curated("오늘 열린 브랜드 상품 중 꿀템만 골랐어요")}${cartNote()}${chipsGrid("brand", brands.map((b) => ({ label: b.brand, sub: b.rate ? `~${b.rate}%` : "", items: b.items || [] })), false)}</div>
           ${brandDaySec(now)}${benefitSec(now)}${bestSec()}${tipsSec()}${liveSec(todayKey)}`;
       }
-      const nowDay = zone.querySelector(".bf-day.now");
+      liftCard();
+      const nowDay = root.querySelector("#bf-topcard .bf-day.now") || zone.querySelector(".bf-day.now");
       if (nowDay) nowDay.parentNode.scrollLeft = Math.max(0, nowDay.offsetLeft - 50);
       tick();
     }
@@ -2863,7 +3108,7 @@ async function renderPublicSite(root) {
     });
     function tick() {
       const now = nowFn();
-      zone.querySelectorAll("[data-cd]").forEach((el) => { el.innerHTML = fmtLeft(+el.dataset.cd - now); });
+      [zone, root.querySelector("#bf-topcard")].forEach((z) => z && z.querySelectorAll("[data-cd]").forEach((el) => { el.innerHTML = fmtLeft(+el.dataset.cd - now); }));
       const mini = root.querySelector("#bf-mini-cd");
       if (mini) mini.innerHTML = fmtLeft((now < T_TEASE ? T_TEASE : now < T_OPEN ? T_OPEN : nextMidnight(now)) - now);
       const want = now >= T_END ? "end" : now < T_OPEN ? "pre" : "live";
@@ -2993,13 +3238,13 @@ async function renderPublicSite(root) {
     // ---------- 나이대별 브랜드 (site_data id='brands') ----------
     if (BR_ON && root.querySelector("#tab-brands")) {
       const bBox = root.querySelector("#br-list"), styBox = root.querySelector("#br-sty");
-      const bst = Object.assign({ age: "20대", sty: "캐주얼" }, readUI().br || {}, { sex: "F" });
+      const bst = Object.assign({ age: "20대", sty: "캐주얼", sex: "F" }, readUI().br || {});
       let BRD = null;
       const STY0 = ["캐주얼", "미니멀", "로맨틱", "걸코어", "스트릿", "시크"];
       const drawBr = () => {
         if (!BRD) return;
         const hasHot = BRD.groups.some((g) => g.key === `${bst.sex}|${bst.age}|HOT`);
-        const STY = (BRD.styles && BRD.styles.length) ? BRD.styles : STY0;
+        const STY = (bst.sex === "F" && BRD.styles && BRD.styles.length) ? BRD.styles : (bst.sex === "F" ? STY0 : ["캐주얼", "스트릿", "포멀", "핀터"]);
         const styles = [...(hasHot ? ["HOT"] : []), ...STY];
         if (!styles.includes(bst.sty)) bst.sty = hasHot ? "HOT" : "캐주얼";
         styBox.innerHTML = styles.map((v) => `<button type="button" data-v="${v}" class="${v === "HOT" ? "br-trend " : ""}${v === bst.sty ? "active" : ""}">${v === "HOT" ? "🔥 HOT" : v}</button>`).join("");
@@ -3010,7 +3255,7 @@ async function renderPublicSite(root) {
           const items = B.items.map((x) => ({ brand: B.b, name: x.n, img: "https://image.msscdn.net" + x.i, link: curl(x.l), sale: x.p, rate: x.r }));
           const first = items[0];
           return `<div class="rec-row">
-            <a class="rec-thumb cat-thumb" href="${esc(first.link)}" target="_blank" rel="noopener" style="position:relative">
+            <a class="rec-thumb cat-thumb" href="#br=${encodeURIComponent(g.key + "~" + i)}" style="position:relative" aria-label="${esc(B.b)} 전체보기">
               <img src="${esc(first.img)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">
               <span class="cat-thumb-name">${esc(B.b)}</span>
             </a>
@@ -3034,7 +3279,7 @@ async function renderPublicSite(root) {
     const catRow = (c, href) => {
       const first = c.items[0]; const th = safeImg(c.thumb || first.img);
       return `<div class="rec-row">
-        <a class="rec-thumb cat-thumb" href="${esc(safeUrl(first.link) || "#")}" target="_blank" rel="noopener" aria-label="${esc(c.cat)} 1위">
+        <a class="rec-thumb cat-thumb" href="${href}" aria-label="${esc(c.cat)} 전체보기">
           ${th ? `<img src="${esc(th)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">` : ""}
           <span class="cat-thumb-name">${esc(c.cat)}</span>
         </a>
@@ -3059,14 +3304,15 @@ async function renderPublicSite(root) {
       const list = catRankList(catSex, catAge);
       cBox.innerHTML = list.length ? list.map((c) => catRow(c, `#ca=${encodeURIComponent(c.key)}`)).join("") : `<p class="ep-empty">곧 올라와요</p>`;
     };
-    const sexBox = root.querySelector("#cat-sex"), ageBox = root.querySelector("#cat-age");
+    const sexBox = root.querySelector("#cat-sex"), ageBox = root.querySelector("#cat-age"), etcBox = root.querySelector("#cat-etc");
     const drawPickList = (key, pre, suffix) => {
       const list = ((ADMIN && Array.isArray(ADMIN[key])) ? ADMIN[key] : []).filter((c) => (c.items || []).length);
       if (cBox) cBox.innerHTML = list.length ? list.map((c, i) => catRow({ cat: c.cat + suffix, title: c.title, items: c.items, thumb: c.thumb }, `#ct=${pre}${i}`)).join("") : `<p class="ep-empty">곧 올라와요</p>`;
     };
-    if (sexBox) sexBox.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => {
+    const catBtns = [...(sexBox ? sexBox.querySelectorAll("button") : []), ...(etcBox ? etcBox.querySelectorAll("button") : [])];
+    catBtns.forEach((b) => b.addEventListener("click", () => {
       catSex = b.dataset.s;
-      sexBox.querySelectorAll("button").forEach((x) => x.classList.toggle("active", x === b));
+      catBtns.forEach((x) => x.classList.toggle("active", x === b));
       ageBox.hidden = !(catSex === "M" || catSex === "F");
       if (catSex === "mood") drawPickList("moodPicks", "m", " 무드");
       else if (catSex === "acc") drawPickList("accPicks", "x", "");
@@ -3125,14 +3371,14 @@ async function renderPublicSite(root) {
         list.innerHTML = c.sets.map((st, n) => {
           const [o, i, p, sh] = st.items;
           return `<div class="rec-row">
-          ${safeImg(st.board) ? `<a class="sp-one" href="${esc(safeImg(st.board))}" target="_blank" rel="noopener" aria-label="${esc(packTitle(c))} ${n + 1} 코디 크게 보기"><img src="${esc(safeImg(st.board))}" alt="" loading="lazy" decoding="async"></a>` : `<div class="sp-board">${tile(o, "o")}${tile(i, "i")}${tile(p, "p")}${tile(sh, "s")}</div>`}
+          ${safeImg(st.board) ? `<a class="sp-one" href="#${hp}=${pfx}${ci}_${n}" aria-label="${esc(packTitle(c))} ${n + 1} 제품 전체보기"><img src="${esc(safeImg(st.board))}" alt="" loading="lazy" decoding="async"></a>` : `<div class="sp-board">${tile(o, "o")}${tile(i, "i")}${tile(p, "p")}${tile(sh, "s")}</div>`}
           <div class="rec-body">
             <div class="rec-head">
               <p class="story-title" style="margin:0">${esc(packTitle(c))} ${String(n + 1).padStart(2, "0")}</p>
               <a class="rec-more" href="#${hp}=${pfx}${ci}_${n}">전체보기</a>
             </div>
             <div class="rec-scroll">${st.items.map((it) => `<a class="rec-prod" href="${esc(safeUrl(it.link) || "#")}" target="_blank" rel="noopener">
-              <div class="rec-prod-img">${safeImg(it.img) ? `<img src="${esc(safeImg(it.img))}" alt="${esc(it.name)}" loading="lazy" decoding="async" referrerpolicy="no-referrer">` : "사진"}<span class="sp-role">${esc(it.role || "")}</span></div>
+              <div class="rec-prod-img">${safeImg(it.flat || it.img) ? `<img src="${esc(safeImg(it.flat || it.img))}" alt="${esc(it.name)}" loading="lazy" decoding="async" referrerpolicy="no-referrer">` : "사진"}<span class="sp-role">${esc(it.role || "")}</span></div>
               <p class="rec-prod-brand">${esc(it.brand)}</p>
               <p class="rec-prod-name">${esc(it.name)}</p>
             </a>`).join("")}</div>
@@ -3152,8 +3398,44 @@ async function renderPublicSite(root) {
   })();
 
   // ---------- 탭 ----------
-  const TAB_ORDER = [BF_ON ? "bf" : "", BR_ON ? "brands" : "", "cats"].filter(Boolean);
+  const TAB_ORDER = [BF_ON ? "bf" : "", BR_ON ? "brands" : "", "cats", "mood", "starter", "levelup"].filter(Boolean);
+  // 메뉴 5개로 묶기: 탭 화면(섹션)은 그대로 두고, 메뉴 버튼만 묶음 단위로 + 묶음 안에서는 위쪽 선택 바로 이동
+  const GROUPS = [
+    BF_ON ? { key: "bf", subs: [["bf", ""]] } : null,
+    { key: "age", subs: [BR_ON ? ["brands", "👕 브랜드"] : null, ["cats", "🗂️ 카테고리"], ["mood", "✨ 분위기"]].filter(Boolean) },
+    { key: "pack", subs: [["starter", "🧩 스타터팩"], ["levelup", "🚀 레벨업 팩"]] },
+  ].filter(Boolean);
+  const gOf = (idx) => Math.max(0, GROUPS.findIndex((g) => g.subs.some((x) => x[0] === TAB_ORDER[idx])));
+  const lastSub = {};
+  const subbar = root.querySelector("#subbar");
+  let subG = -1;
+  function drawSub() {
+    const gi = gOf(activeIndex), g = GROUPS[gi]; if (!subbar || !g) return;
+    if (g.subs.length < 2) { subbar.hidden = true; subG = gi; return; }
+    const si = g.subs.findIndex((x) => x[0] === TAB_ORDER[activeIndex]);
+    if (subG !== gi) { subbar.innerHTML = `<div class="subbar-in" style="--n:${g.subs.length};--i:${si}"><i class="thumb"></i>${g.subs.map(([k, t]) => `<button type="button" data-sub="${k}">${t}</button>`).join("")}</div>`; subG = gi; }
+    subbar.hidden = false;
+    const inn = subbar.firstElementChild; inn.style.setProperty("--i", si);
+    inn.querySelectorAll("button").forEach((b, i) => b.classList.toggle("active", i === si));
+  }
+  if (subbar) subbar.addEventListener("click", (e) => { const b = e.target.closest("[data-sub]"); if (b) setActive(TAB_ORDER.indexOf(b.dataset.sub)); });
+  // 성별·나이대는 한 번 고르면 브랜드·카테고리·코디 팩에 같이 적용
+  const SEL = { sex: "", age: "" }, selApplied = {};
+  root.addEventListener("click", (e) => {
+    if (!e.isTrusted) return;
+    const b = e.target.closest("#br-sex button, #br-age button, #cat-sex button, #cat-age button, #sp-sex button, #sp-age button, #lp-sex button, #lp-age button"); if (!b) return;
+    const v = b.dataset.v || b.dataset.s || b.dataset.a || "";
+    if (/-sex$/.test(b.parentNode.id)) { if (v === "M" || v === "F") SEL.sex = v; } else if (/대$/.test(v)) SEL.age = v;
+  }, true);
+  function applySel(key) {
+    const sig = SEL.sex + "|" + SEL.age; if (sig === "|" || selApplied[key] === sig) return; selApplied[key] = sig;
+    const hit = (q) => { const b = root.querySelector(q); if (b && !b.classList.contains("active")) b.click(); };
+    if (key === "brands") { if (SEL.sex) hit(`#br-sex button[data-v="${SEL.sex}"]`); if (SEL.age) hit(`#br-age button[data-v="${SEL.age}"]`); }
+    else if (key === "cats") { if (SEL.sex) { hit(`#cat-sex button[data-s="${SEL.sex}"]`); if (SEL.age) hit(`#cat-age button[data-a="${SEL.age}"]`); } }
+    else if (key === "starter" || key === "levelup") { const pp = key === "starter" ? "sp" : "lp"; if (SEL.sex) hit(`#${pp}-sex button[data-v="${SEL.sex}"]`); if (SEL.age) hit(`#${pp}-age button[data-v="${SEL.age}"]`); }
+  }
   const buttons = root.querySelectorAll("nav.tabs button");
+  buttons.forEach((b) => { try { if (localStorage.getItem("pdk_seen_" + b.dataset.g)) { const d = b.querySelector(".nv-dot"); if (d) d.remove(); } } catch (e) {} });
   const slider = root.querySelector("#tab-slider");
   // 숨긴 탭 섹션은 슬라이더 밖으로 (탭 순서와 슬라이더 칸 순서 맞추기)
   (function () { const park = document.createElement("div"); park.hidden = true; slider.parentNode.appendChild(park); slider.querySelectorAll(":scope > .section-off").forEach((sec) => park.appendChild(sec)); })();
@@ -3179,13 +3461,19 @@ async function renderPublicSite(root) {
     const cp = root.querySelector("#cpz"), aw = root.querySelector("section.aw");
     if (aw) bfSec.insertBefore(aw, bfSec.firstChild);
     if (cp) bfSec.insertBefore(cp, bfSec.firstChild);
+    const tc = root.querySelector("#bf-topcard"); if (tc) bfSec.insertBefore(tc, bfSec.firstChild);
   })();
   function setActive(index, opts) {
     opts = opts || {};
     activeIndex = Math.max(0, Math.min(TAB_ORDER.length - 1, index));
     slider.style.transition = opts.instant ? "none" : "";
     slider.style.transform = `translateX(-${activeIndex * step}%)`;
-    buttons.forEach((b, i) => b.classList.toggle("active", i === activeIndex));
+    const gi = gOf(activeIndex);
+    buttons.forEach((b, i) => b.classList.toggle("active", i === gi));
+    lastSub[GROUPS[gi].key] = TAB_ORDER[activeIndex];
+    drawSub();
+    try { applySel(TAB_ORDER[activeIndex]); } catch (e) {}
+    if (!opts.instant) { const sec = slider.children[activeIndex]; if (sec) { sec.classList.remove("tab-in"); void sec.offsetWidth; sec.classList.add("tab-in"); } }
     // 블프 주인장 BEST PICK은 무진장 블프 탭에서만 보여요
     if (!TAB_ORDER.includes("bf")) { const awSec = root.querySelector("section.aw"); if (awSec) awSec.style.display = ""; }
     showOnly(activeIndex, opts.instant ? 0 : 420);
@@ -3200,16 +3488,29 @@ async function renderPublicSite(root) {
   }
   try { const ro = new ResizeObserver(() => fitSliderHeight()); [...slider.children].forEach((c) => ro.observe(c)); } catch (e) {}
 
-  buttons.forEach((btn, i) => {
-    btn.addEventListener("click", () => {
-      setActive(i);
+  const goGroup = (gi) => {
+      const g = GROUPS[gi]; if (!g) return;
+      const key = lastSub[g.key] && TAB_ORDER.includes(lastSub[g.key]) ? lastSub[g.key] : g.subs[0][0];
+      setActive(TAB_ORDER.indexOf(key));
+      const btn = buttons[gi], dot = btn && btn.querySelector(".nv-dot");
+      if (dot) { dot.remove(); try { localStorage.setItem("pdk_seen_" + g.key, "1"); } catch (e) {} }
       // 메뉴가 라인업 바로 아래에 있어서, 누르면 내용 시작 지점으로 내려가요
       const nav = root.querySelector("nav.tabs");
       const navH = nav ? nav.offsetHeight : 0;
-      const y = viewport.getBoundingClientRect().top + window.scrollY - navH - 6;
+      const anchor = subbar && !subbar.hidden ? subbar : viewport;
+      const y = anchor.getBoundingClientRect().top + window.scrollY - navH - 6;
       if (Math.abs(window.scrollY - y) > 8) window.scrollTo({ top: y, behavior: "smooth" });
-    });
-  });
+  };
+  buttons.forEach((btn, gi) => btn.addEventListener("click", () => goGroup(gi)));
+  // 블프 탭 안 바로가기 (나이대별·코디 팩)
+  (function () {
+    const bfSec = root.querySelector("#tab-bf"); if (!bfSec) return;
+    const box = document.createElement("div"); box.className = "bf-short"; box.id = "bf-short";
+    box.innerHTML = `<button type="button" data-gg="age"><b>👕 내 나이대 꿀템 →</b><small>브랜드·카테고리·분위기별</small></button><button type="button" data-gg="pack"><b>🧥 코디 팩 →</b><small>스타터팩·레벨업 한 번에</small></button>`;
+    const before = bfSec.querySelector(":scope > section.aw") || bfSec.querySelector(":scope > #bf-zone");
+    if (before) bfSec.insertBefore(box, before); else bfSec.appendChild(box);
+    box.addEventListener("click", (e) => { const b = e.target.closest("[data-gg]"); if (!b) return; const gi = GROUPS.findIndex((g) => g.key === b.dataset.gg); if (gi >= 0) goGroup(gi); });
+  })();
 
   // 스와이프 제스처 (가로로 넘기는 사진 줄 위에서는 탭이 안 넘어가게)
   let touchStartX = 0, touchStartY = 0, touchCurrentX = 0, dragging = false, viewportWidth = 0, decided = false, horizontal = false;
@@ -3267,7 +3568,7 @@ async function renderPublicSite(root) {
     }
   } catch (e) {}
   window.addEventListener("hashchange", routeFromHash);
-  if (/^#(ep|st|ct|ca|br|sp|lp|look|looks|cp)=/.test(location.hash) || location.hash === "#bp" || location.hash === "#lf" || location.hash === "#lu" || location.hash === "#cps") routeFromHash();
+  if (/^#(ep|st|ct|ca|br|sp|lp|look|looks|cp|spa)=/.test(location.hash) || location.hash === "#bp" || location.hash === "#lf" || location.hash === "#lu" || location.hash === "#cps") routeFromHash();
   loadCoupons().then(renderCouponStrip);
   finishIntro();
 
@@ -3403,6 +3704,80 @@ renderPublicSite(ROOT_EL);
 #mds-wish .w-go{background:#5B5BF0;color:#fff;flex:2!important}
 #mds-wish .w-no{background:#f1f1f1;color:#555}
 #mds-wish .w-done{text-align:center;padding:18px 0 8px;font-size:16px;font-weight:700;line-height:1.5}
+
+/* ---- 메뉴 5개 + 선택 바 + 효과 ---- */
+#app-root nav.tabs { gap: 5px; padding: 10px 16px; }
+#app-root nav.tabs button { flex: 1 1 auto; position: relative; padding: 10px 4px; font-size: 13.5px; text-align: center; transition: background .2s, color .2s, border-color .2s; }
+#app-root nav.tabs button.active { animation: navPop .34s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes navPop { 0% { transform: scale(.9); } 100% { transform: scale(1); } }
+#app-root .nv-dot { position: absolute; top: -3px; right: -2px; width: 8px; height: 8px; border-radius: 50%; background: #5B5BF0; }
+#app-root .nv-dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: #5B5BF0; animation: nvPing 1.6s ease-out infinite; }
+@keyframes nvPing { to { transform: scale(2.8); opacity: 0; } }
+#app-root .subbar { max-width: 720px; margin: -6px auto 14px; padding: 0 20px; }
+#app-root .subbar[hidden] { display: none; }
+#app-root .subbar-in { position: relative; display: grid; grid-template-columns: repeat(var(--n), 1fr); background: #f1eee9; border-radius: 12px; padding: 4px; animation: subIn .35s ease both; }
+#app-root .subbar-in .thumb { position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc((100% - 8px) / var(--n)); border-radius: 9px; background: #fff; box-shadow: 0 1px 5px rgba(0, 0, 0, .14); transform: translateX(calc(100% * var(--i))); transition: transform .34s cubic-bezier(.22, 1, .36, 1); }
+#app-root .subbar-in button { position: relative; z-index: 1; border: 0; background: none; font: inherit; font-size: 13.5px; font-weight: 800; letter-spacing: -0.3px; color: #8a847b; padding: 10px 0; cursor: pointer; transition: color .2s; }
+#app-root .subbar-in button.active { color: #1F1D26; }
+@keyframes subIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+#app-root .tab-slider { min-height: 100vh; }
+#app-root .tab-slider > .section.tab-in { animation: tabIn .42s ease; }
+@keyframes tabIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+#app-root .bf-short { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 2px 0 16px; }
+#app-root .bf-short button { position: relative; overflow: hidden; text-align: left; border: 1.5px solid #1F1D26; border-radius: 14px; background: #fff; padding: 12px 12px 11px; font: inherit; cursor: pointer; }
+#app-root .bf-short b { display: block; font-size: 13.5px; font-weight: 900; letter-spacing: -0.4px; color: #1F1D26; }
+#app-root .bf-short small { display: block; margin-top: 3px; font-size: 10.5px; font-weight: 700; color: #8a847b; }
+#app-root .bf-short button::after { content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; background: linear-gradient(100deg, transparent, rgba(91, 91, 240, .16), transparent); animation: shSweep 2.8s ease-in-out infinite; }
+@keyframes shSweep { 0%, 55% { left: -60%; } 100% { left: 130%; } }
+@media (prefers-reduced-motion: reduce) { #app-root nav.tabs button.active, #app-root .nv-dot::after, #app-root .subbar-in, #app-root .tab-slider > .section.tab-in, #app-root .bf-short button::after { animation: none; } #app-root .subbar-in .thumb { transition: none; } }
+
+/* ---- 실시간 타임세일 중 꿀템 ---- */
+#app-root .tsz { margin: 4px 0 14px; }
+#app-root .tsz .hotz-head { align-items: center; }
+#app-root .ts-em { font-style: normal; color: #1F1D26; background: #ffe14d; padding: 1px 7px 2px; border-radius: 6px; margin-left: 2px; }
+#app-root .tsz-more { margin-left: auto; border: 0; background: none; font: inherit; font-size: 11.5px; font-weight: 800; color: #1F1D26; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; padding: 0; white-space: nowrap; }
+#app-root .tsz-ago { order: 3; flex-basis: 100%; }
+#app-root .tsz .hotz-bar, #app-root .cpz .hotz-bar { margin: 0 0 10px; }
+#app-root .tsz-scroll { display: flex; gap: 8px; overflow-x: auto; margin: 0 -20px; padding: 2px 20px 4px; scrollbar-width: none; scroll-snap-type: x proximity; }
+#app-root .tsz-scroll::-webkit-scrollbar { display: none; }
+#app-root .tsz-scroll > .bf-item { flex: 0 0 31%; max-width: 150px; scroll-snap-align: start; }
+#app-root .tsz .bf-item .tg { background: #1F1D26; color: #ffe14d; }
+#app-root .tsz .bf-item .cm { color: #5B5BF0; font-weight: 800; font-size: 10.5px; }
+
+/* ---- 대표 브랜드 프리오픈 쿠폰 칸 (타임세일 칸처럼 가볍게) ---- */
+#app-root .spz { margin: 4px 0 14px; }
+#app-root .spz-box { margin: 0 0 12px; }
+#app-root .spz-t { margin: 0; font-size: 15px; font-weight: 900; letter-spacing: -0.4px; color: #1F1D26; }
+#app-root .spz-t em { font-style: normal; color: #1F1D26; background: #ffe14d; padding: 1px 7px 2px; border-radius: 6px; margin-left: 2px; }
+#app-root .spz-k { margin: 3px 0 8px; font-size: 10.5px; font-weight: 700; color: #8a847b; }
+#app-root .spz-chips { display: flex; gap: 5px; overflow-x: auto; margin: 0 -20px 8px; padding: 0 20px; scrollbar-width: none; }
+#app-root .spz-chips::-webkit-scrollbar { display: none; }
+#app-root .spz-chips a { flex: 0 0 auto; background: #fff; color: #1F1D26; text-decoration: none; border: 1px solid #1F1D26; border-radius: 999px; padding: 6px 11px 5px; font-size: 11.5px; font-weight: 800; white-space: nowrap; }
+#app-root .spz-chips a b { color: #5B5BF0; font-weight: 900; margin-right: 2px; }
+#app-root .spz .bf-item .tg { background: #1F1D26; color: #ffe14d; }
+#app-root .spz-after { margin: 2px 0 0; font-size: 10.5px; font-weight: 900; color: #5B5BF0; letter-spacing: -0.2px; }
+
+#app-root .spz-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px 8px; padding: 0 16px; }
+#app-root .spz-tabs { display: flex; gap: 6px; padding: 12px 16px 14px; }
+#app-root .spz-tabs a { flex: 1; text-align: center; padding: 9px 0; border: 1px solid #1a1a1a; border-radius: 999px; font-size: 12.5px; font-weight: 800; color: #1a1a1a; text-decoration: none; }
+#app-root .spz-tabs a b { color: #5B5BF0; }
+#app-root .spz-tabs a.on { background: #1a1a1a; color: #fff; }
+#app-root .spz-tabs a.on b { color: #ffd84d; }
+@media (min-width: 760px) { #app-root .spz-grid { grid-template-columns: repeat(5, 1fr); } }
+
+#app-root .spz-allbtn { margin-left: auto; font-size: 12px; font-weight: 800; color: #1a1a1a; text-decoration: none; border: 1px solid #1a1a1a; border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
+#app-root .spz-t { display: flex; align-items: center; gap: 5px; flex-wrap: nowrap; white-space: nowrap; }
+#app-root .spz-t em { white-space: nowrap; }
+#app-root .spz-chips a.spz-chip-all { background: #1F1D26; color: #fff; }
+@media (max-width: 420px) { #app-root .spz-t { font-size: 14px; letter-spacing: -0.6px; } #app-root .spz-t em { padding: 1px 5px 2px; } }
+#app-root .tsz-scroll > .spz-endcard { flex: 0 0 31%; max-width: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; aspect-ratio: 3/4; background: #f3f1ee; border-radius: 10px; font-size: 12.5px; font-weight: 800; color: #1a1a1a; text-decoration: none; }
+#app-root .spz-endcard b { font-size: 20px; color: #5B5BF0; }
+
+#app-root .tsc .tsc-soon { position: absolute; left: 4px; bottom: 4px; font-size: 9px; font-weight: 900; color: #fff; background: #5B5BF0; border-radius: 4px; padding: 2px 5px 1px; }
+#app-root .tsc .tsc-cp { margin: 2px 0 0; font-size: 10.5px; font-weight: 800; color: #5B5BF0; letter-spacing: -0.3px; line-height: 1.35; }
+#app-root .tsc .tsc-cp b { display: block; font-size: 14px; font-weight: 900; color: #1F1D26; }
+#app-root .tsc .tsc-cp i { font-style: normal; color: #5B5BF0; }
+#app-root button.spz-endcard { border: 0; cursor: pointer; font-family: inherit; }
 </style>
 <script>
 // ---------- 블프 위시리스트 팝업 (들어올 때마다, 바로 닫을 수 있음) ----------

@@ -10,6 +10,16 @@ const row = async (id) => {
   return j[0] ? j[0].value : null;
 };
 const pick = (o, keys) => { const out = {}; keys.forEach((k) => { if (o && o[k] !== undefined) out[k] = o[k]; }); return out; };
+const MEN = /남성|\[MEN\]|맨즈|\(M\)\s*$/;
+const okItem = (x) => x && !MEN.test(String(x.name || "")) && !/키즈|KIDS/.test(String(x.name || ""));
+const noMen = (o) => {
+  if (!o) return undefined;
+  const c = JSON.parse(JSON.stringify(o));
+  if (Array.isArray(c.items)) c.items = c.items.filter(okItem);
+  if (Array.isArray(c.brands)) c.brands.forEach((b) => { if (Array.isArray(b.items)) b.items = b.items.filter(okItem); if (Array.isArray(b.all)) b.all = b.all.filter(okItem); });
+  return c;
+};
+const noMenHot = (o) => { if (!o) return undefined; const c = JSON.parse(JSON.stringify(o)); (c.cats || []).forEach((k) => { k.items = (k.items || []).filter(okItem); }); return c; };
 async function buildMain() {
   const [M, P] = await Promise.all([row("main"), row("pdk_main")]);
   const mb = (M && M.bf) || {}, pb = (P && P.bf) || {};
@@ -17,8 +27,9 @@ async function buildMain() {
   return {
     site: (P && P.site) || { name: "패더쿠", brand: "패더쿠", bio: "패션 할인 소식 제일 빠른 곳", avatar: "", footer: "패더쿠" },
     lineup: (P && P.lineup) || [],
-    moodCats: (P && P.moodCats) || [],
+    moodCats: (P && P.moodCats && P.moodCats.length) ? P.moodCats : ((M && M.moodCats) || []),
     categories: (P && P.categories) || [],
+    accPicks: (M && M.accPicks) || [], shoePicks: (M && M.shoePicks) || [], bagPicks: (M && M.bagPicks) || [],
     brandsOn: true,
     awards: { on: false, items: [] },
     longform: { on: false },
@@ -38,6 +49,11 @@ async function buildMain() {
         alerts: pb.alerts || [], alertsAt: pb.alertsAt || "",
         now: pb.now || {}, pre: pb.pre || {},
         picks: [], mycart: { on: false },
+        // 실시간 칸: 패더쿠 전용 데이터가 있으면 그걸, 없으면 MD STUDIO 것에서 남성 전용만 빼고
+        spot: pb.spot || noMen(mb.spot),
+        ts: pb.ts || noMen(mb.ts),
+        dm: pb.dm || noMen(mb.dm),
+        hot: pb.hot || noMenHot(mb.hot),
       }
     ),
   };
@@ -48,8 +64,13 @@ module.exports = async function handler(req, res) {
     let out;
     if (id === "main") out = await buildMain();
     else if (id === "episodes") out = [];
-    else if (id === "packs") out = { starter: [], levelup: [] };
-    else if (id === "brands") out = (await row("pdk_brands")) || (await row("brands"));
+    else if (id === "packs") out = (await row("pdk_packs")) || (await row("packs")) || { starter: [], levelup: [] };
+    else if (id === "brands") {
+      // 시스터 = 패더쿠 여성 데이터(스타일 계열별), 브로 = MD STUDIO 남성 데이터
+      const [W, B] = await Promise.all([row("pdk_brands"), row("brands")]);
+      const gW = (W && W.groups) || [], gB = ((B && B.groups) || []).filter((g) => /^M\|/.test(g.key) || !gW.length);
+      out = Object.assign({}, B || {}, { at: (W && W.at) || (B && B.at), styles: (W && W.styles) || [], groups: [...gW, ...gB] });
+    }
     else if (SHARED[id]) out = await row(id);
     else { res.statusCode = 400; return res.end("bad id"); }
     if (out == null) throw new Error("empty");
