@@ -53,8 +53,13 @@ S.append(f'''<div class="pg" style="background-color:{LAVL};background-image:rad
 <div class="card" style="position:absolute;left:150px;top:1060px;width:330px;padding:24px 28px;transform:rotate(-2deg);background:{RED};color:#fff">
   <p style="font-size:24px;font-weight:700;opacity:.9">시그니처특가 할인율</p><p style="font-size:44px;font-weight:900;letter-spacing:-1px;margin-top:6px">최대 69%</p></div>
 <img src="{BOX}" style="position:absolute;right:40px;bottom:130px;width:360px">
-<div class="bub" style="right:220px;bottom:500px">이거 하나면 끝!</div>
-<div style="position:absolute;left:64px;bottom:60px;font-size:30px;font-weight:800;color:{LAV}">일정 · 회차 · 쿠폰 · 꿀팁 한 번에 →</div>
+<div class="bub" style="right:230px;bottom:470px">이거 하나면 끝!</div>
+<div style="position:absolute;left:64px;bottom:58px;display:flex;gap:12px;font-size:26px;font-weight:800">
+ <span style="background:#fff;border:3px solid {INK};border-radius:999px;padding:8px 18px">🔖 저장해두고</span>
+ <span style="background:#fff;border:3px solid {INK};border-radius:999px;padding:8px 18px">📤 친구한테 공유</span></div>
+<div style="position:absolute;right:0;top:600px;height:150px;display:flex;align-items:center;gap:14px;background:{INK};color:#fff;border-radius:75px 0 0 75px;padding:0 34px 0 44px;box-shadow:0 10px 0 rgba(0,0,0,.12)">
+ <span style="font-size:34px;font-weight:900;line-height:1.2">넘겨서<br><span style="color:{YEL}">한 번에 보기</span></span>
+ <span style="font-size:84px;font-weight:900;color:{YEL};line-height:1">›</span></div>
 </div>''')
 
 # 2 일정 = 회차 카드 + 날짜별 할인 브랜드 (달력 없이)
