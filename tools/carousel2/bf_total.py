@@ -27,8 +27,8 @@ body{{width:1080px;height:1350px;overflow:hidden;font-family:P,'Noto Sans CJK KR
 .foot{{position:absolute;left:64px;bottom:52px;font-size:24px;font-weight:600;color:{GRAY}}}
 </style>"""
 
-def frame(no, body, foot='무신사 공지·홈페이지 기준 · 11/21 확인'):
-    return f'<div class="pg"><div class="logo"><img src="{BOXF}">패더쿠</div><div class="pgno">{no} / 06</div>{body}<div class="foot">{foot}</div></div>'
+def frame(no, body, foot=''):
+    return f'<div class="pg"><div class="logo"><img src="{BOXF}">패더쿠</div><div class="pgno">{no} / 05</div>{body}<div class="foot">{foot}</div></div>'
 
 def mascot(x, y, w, say, flip=False):
     tail = 'right:70px' if not flip else 'left:70px'
@@ -57,61 +57,29 @@ S.append(f'''<div class="pg" style="background-color:{LAVL};background-image:rad
 <div style="position:absolute;left:64px;bottom:60px;font-size:30px;font-weight:800;color:{LAV}">일정 · 회차 · 쿠폰 · 꿀팁 한 번에 →</div>
 </div>''')
 
-# 2 일정 캘린더 + 날짜별 할인
-def cal(h=84):
-    days = ['월', '화', '수', '목', '금', '토', '일']
-    seq = [(11, d) for d in range(16, 31)] + [(12, d) for d in range(1, 7)]
-    head = ''.join(f'<div style="text-align:center;font-size:24px;font-weight:800;color:{GRAY if i < 5 else (LAV if i == 5 else RED)}">{d}</div>' for i, d in enumerate(days))
-    cells = ''
-    for m, d in seq:
-        k = (m, d)
-        tease = k in [(11, 20), (11, 21)]
-        main = (m == 11 and d >= 22) or (m == 12 and d <= 2)
-        star = k in [(11, 22), (11, 27), (12, 2)]
-        bg = YEL if tease else (LAV if main else '#fff')
-        col = INK if tease else ('#fff' if main else '#B8B5C8')
-        ring = f'outline:6px solid {RED};outline-offset:-6px;' if k == (11, 22) else ''
-        lab = f'{m}/{d}' if d == 1 or (m, d) == (11, 16) else str(d)
-        st = f'<span style="position:absolute;right:8px;top:2px;font-size:26px;color:{YEL if main else LAV}">★</span>' if star else ''
-        cells += f'<div style="position:relative;height:{h}px;border-radius:16px;background:{bg};{ring}border:3px solid {INK if (tease or main) else "#E4E1F0"};display:flex;align-items:flex-end;padding:8px 12px;font-size:28px;font-weight:900;color:{col}">{lab}{st}</div>'
-    return f'<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:9px">{head}{cells}</div>'
+# 2 일정 = 회차 카드 + 날짜별 할인 브랜드 (달력 없이)
+def rcard(date, title, brands, bg='#fff', fg=INK, dbg=LAVL, dfg=INK, tag='', tagc=RED):
+    t = f'<span style="position:absolute;right:26px;top:-20px;background:{tagc};color:#fff;font-size:24px;font-weight:900;padding:6px 16px;border-radius:999px;transform:rotate(3deg)">{tag}</span>' if tag else ''
+    return f'''<div class="card" style="position:relative;display:flex;align-items:center;gap:26px;padding:14px 26px;background:{bg};color:{fg}">{t}
+<span style="flex:none;width:200px;text-align:center;background:{dbg};color:{dfg};border:3px solid {INK};border-radius:14px;padding:12px 0;font-size:28px;font-weight:900;letter-spacing:-0.5px">{date}</span>
+<div style="min-width:0"><p style="font-size:38px;font-weight:900;letter-spacing:-1.5px;white-space:nowrap">{title}</p>
+<p style="font-size:24px;font-weight:600;opacity:.75;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{brands}</p></div></div>'''
 
-def drow(date, dc, dfg, title, brands, tag='', tagc=RED):
-    t = f'<span style="margin-left:10px;background:{tagc};color:#fff;font-size:21px;font-weight:900;padding:4px 12px;border-radius:999px;vertical-align:3px">{tag}</span>' if tag else ''
-    return f'''<div style="display:flex;gap:20px;align-items:center;padding:10px 0;border-bottom:3px dashed #E1DDF0">
-<span style="flex:none;width:190px;text-align:center;background:{dc};color:{dfg};border:3px solid {INK};border-radius:14px;padding:9px 0;font-size:27px;font-weight:900;letter-spacing:-0.5px">{date}</span>
-<div style="min-width:0"><p style="font-size:31px;font-weight:900;letter-spacing:-1px;white-space:nowrap">{title}{t}</p>
-<p style="font-size:24px;font-weight:600;color:{GRAY};margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{brands}</p></div></div>'''
-
-ROWS = ''.join([
-    drow('11.20 – 21', YEL, INK, '티징 · 쿠폰부터 받기', '프리 오픈 쿠폰팩 최대 30% · 장바구니 쿠폰 최대 25%'),
-    drow('11.22 – 24', LAV, '#fff', '1회차 아우터 · 킥스', '나이키 최대 55%+20% 쿠폰 · 노스페이스 · 마뗑킴 · 수아레 · 어그', tag='아우터는 이때'),
-    drow('11.25 – 27', LAV, '#fff', '2회차 상의 · 하의', '미쏘 · 아크테릭스 · 마시모두띠 · 에트오소메 · 로긴 앤 로지'),
-    drow('11.28 – 29', LAV, '#fff', '3회차 뷰티 · 잡화', '클리오 · 페리페라 · 나스 · 엠엘비 · 락피쉬웨더웨어'),
-    drow('11.30 – 12.1', LAV, '#fff', '4회차 무료배송 · 무탠다드', '무신사 스탠다드 우먼 · 트릴리온 · 리 · 세컨드솔트'),
-    drow('12.2', INK, '#fff', '파이널 앙코르 아우터 · 킥스', '1회차 놓친 아우터 · 신발 마지막 기회 + 하루특가', tag='마지막', tagc=LAV),
+RC = ''.join([
+    rcard('11.20 – 21', '티징 · 쿠폰부터 받기', '프리 오픈 쿠폰팩 최대 30% · 장바구니 쿠폰 최대 25%', bg=YEL, dbg='#fff'),
+    rcard('11.22 – 24', '1회차 아우터 · 킥스', '나이키 최대 55%+20% 쿠폰 · 노스페이스 · 마뗑킴 · 수아레 · 어그', bg=LAV, fg='#fff', tag='아우터는 이때'),
+    rcard('11.25 – 27', '2회차 상의 · 하의', '미쏘 · 아크테릭스 · 마시모두띠 · 에트오소메 · 로긴 앤 로지'),
+    rcard('11.28 – 29', '3회차 뷰티 · 잡화', '클리오 · 페리페라 · 나스 · 엠엘비 · 락피쉬웨더웨어'),
+    rcard('11.30 – 12.1', '4회차 무료배송 · 무탠다드', '무신사 스탠다드 우먼 · 트릴리온 · 리 · 세컨드솔트'),
+    rcard('12.2', '파이널 앙코르 아우터 · 킥스', '1회차 놓친 아우터 · 신발 마지막 기회 + 하루특가', bg=INK, fg='#fff', dbg=YEL, tag='마지막', tagc=LAV),
 ])
-
 S.append(frame('01', f'''
-<div style="position:absolute;left:64px;top:140px;display:flex;align-items:center;gap:22px"><span class="chip">01 · 일정</span>
-<p class="myo" style="font-size:66px;letter-spacing:-2.5px">언제, <span class="hl">뭐가</span> 싸요?</p></div>
-<div style="position:absolute;left:64px;right:64px;top:250px">{cal()}</div>
-<div style="position:absolute;left:64px;right:64px;top:585px">{ROWS}</div>
-<div class="stk" style="left:64px;top:1168px;font-size:26px;padding:10px 20px;transform:rotate(-1.5deg);background:{YEL}">TIP · ★ 하루특가 11.22 · 11.27 · 12.2 는 그날 밤 12시면 끝</div>
-<img src="{BOX}" style="position:absolute;right:56px;top:96px;width:150px">
-''', foot='무신사 공지·홈페이지 기준 · 11/21 확인 · 브랜드는 회차별 참여 브랜드 일부'))
-
-# 3 회차
-R = [('1회차', '11.22 – 24', '아우터 · 킥스', LAV, '#fff'), ('2회차', '11.25 – 27', '상의 · 하의', '#fff', INK), ('3회차', '11.28 – 29', '뷰티 · 잡화', '#fff', INK), ('4회차', '11.30 – 12.1', '무료배송 · 무탠다드', '#fff', INK), ('파이널', '12.2', '앙코르 아우터 · 킥스', INK, '#fff')]
-rows = ''.join(f'''<div class="card" style="display:flex;align-items:center;gap:30px;padding:26px 34px;background:{bg};color:{fg}">
-<span style="min-width:150px;font-size:34px;font-weight:900;letter-spacing:-1px">{a}</span>
-<span style="min-width:250px;font-size:34px;font-weight:700;opacity:.8">{b}</span>
-<span style="font-size:42px;font-weight:900;letter-spacing:-1.5px">{c}</span></div>''' for a, b, c, bg, fg in R)
-S.append(frame('02', f'''
-<div style="position:absolute;left:64px;top:150px"><span class="chip">02 · 회차</span>
-<p class="myo h" style="margin-top:26px">날짜마다<br>할인 <span class="hl">카테고리</span>가 달라요</p></div>
-<div style="position:absolute;left:64px;right:64px;top:520px;display:flex;flex-direction:column;gap:22px">{rows}</div>
-<div class="stk" style="right:64px;top:1150px;font-size:30px;padding:12px 22px;transform:rotate(-2deg);background:{YEL}">사고 싶은 날만 저장!</div>
+<div style="position:absolute;left:64px;top:150px"><span class="chip">01 · 일정</span>
+<p class="myo h" style="margin-top:26px">언제, <span class="hl">뭐가</span> 싸요?</p></div>
+<img src="{BOX}" style="position:absolute;right:60px;top:150px;width:220px">
+<div class="bub" style="right:250px;top:150px;font-size:30px">본편은 22일 저녁 7시!</div>
+<div style="position:absolute;left:64px;right:64px;top:385px;display:flex;flex-direction:column;gap:18px">{RC}</div>
+<div class="stk" style="left:64px;top:1225px;font-size:28px;padding:10px 22px;transform:rotate(-1.5deg);background:{YEL}">TIP · 하루특가 11.22 · 11.27 · 12.2 는 그날 밤 12시면 끝</div>
 '''))
 
 # 4 티징 쿠폰
@@ -121,8 +89,8 @@ def ticket(top, big, sub, bg=f'#fff', fg=INK, tag=''):
 <div style="flex:1;padding:0 40px"><p style="font-size:28px;font-weight:700;opacity:.75">{top}</p><p style="font-size:64px;font-weight:900;letter-spacing:-2px;margin-top:4px">{big}</p></div>
 <div style="width:0;height:150px;border-left:4px dashed {fg};opacity:.5"></div>
 <div style="width:250px;padding:0 30px;font-size:28px;font-weight:800;line-height:1.35">{sub}</div></div>'''
-S.append(frame('03', f'''
-<div style="position:absolute;left:64px;top:150px"><span class="chip">03 · 지금 받을 쿠폰</span>
+S.append(frame('02', f'''
+<div style="position:absolute;left:64px;top:150px"><span class="chip">02 · 지금 받을 쿠폰</span>
 <p class="myo h" style="margin-top:26px">본편 전에<br><span class="hl">쿠폰부터</span> 챙기기</p></div>
 <div style="position:absolute;left:64px;right:64px;top:540px;display:flex;flex-direction:column;gap:40px">
 {ticket('프리 오픈 쿠폰팩', '최대 30%', '무신사<br>쿠폰함에서')}
@@ -137,8 +105,8 @@ def hi(no, t, lines, bg='#fff', fg=INK):
     return f'''<div class="card" style="background:{bg};color:{fg};padding:30px 32px;height:330px;display:flex;flex-direction:column">
 <p style="font-size:26px;font-weight:800;opacity:.6">{no}</p><p style="font-size:46px;font-weight:900;letter-spacing:-1.5px;margin-top:6px">{t}</p>
 <p style="font-size:29px;font-weight:600;line-height:1.45;margin-top:auto;opacity:.9">{lines}</p></div>'''
-S.append(frame('04', f'''
-<div style="position:absolute;left:64px;top:150px"><span class="chip">04 · 본편에 열리는 것</span>
+S.append(frame('03', f'''
+<div style="position:absolute;left:64px;top:150px"><span class="chip">03 · 본편에 열리는 것</span>
 <p class="myo h" style="margin-top:26px">22일 저녁 7시,<br>이게 <span class="hl">한꺼번에</span> 열려요</p></div>
 <div style="position:absolute;left:64px;right:64px;top:540px;display:grid;grid-template-columns:1fr 1fr;gap:28px">
 {hi('A', '시그니처특가', '블프 내내 이 가격<br>1,200여 개 · 40~69% 구간 최다', bg=INK, fg='#fff')}
@@ -154,30 +122,28 @@ TIPS = [('오늘 쿠폰 미리 받아두기', '쿠폰팩·장바구니 쿠폰은
 tips = ''.join(f'''<div style="display:flex;gap:26px;align-items:flex-start;padding:26px 0;border-bottom:3px dashed #D8D4EA">
 <span style="flex:none;width:58px;height:58px;border-radius:14px;border:4px solid {INK};background:{YEL if i < 2 else "#fff"};display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900;color:{INK}">✓</span>
 <div><p style="font-size:42px;font-weight:900;letter-spacing:-1.5px">{a}</p><p style="font-size:28px;font-weight:600;color:{GRAY};margin-top:6px">{b}</p></div></div>''' for i, (a, b) in enumerate(TIPS))
-S.append(frame('05', f'''
-<div style="position:absolute;left:64px;top:150px"><span class="chip">05 · 패더쿠 꿀팁</span>
+S.append(frame('04', f'''
+<div style="position:absolute;left:64px;top:150px"><span class="chip">04 · 패더쿠 꿀팁</span>
 <p class="myo h" style="margin-top:26px">이렇게 사면<br><span class="hl">제일 싸요</span></p></div>
 <div class="stamp" style="right:64px;top:200px;font-size:40px;padding:16px 26px;transform:rotate(-6deg)">속지 마세요</div>
 <div class="card" style="position:absolute;left:64px;right:64px;top:520px;padding:6px 40px 10px">{tips}</div>
 '''))
 
-# 7 패더쿠의 옷장 안내
-S.append(frame('06', f'''
-<div style="position:absolute;left:64px;top:150px"><span class="chip">06 · 할인템 모아보기</span>
-<p class="myo h" style="margin-top:26px">매일 바뀌는 할인템은<br><span class="hl">패더쿠의 옷장</span>에</p></div>
-<div class="card" style="position:absolute;left:64px;right:64px;top:540px;height:440px;overflow:hidden;padding:0">
- <div style="height:64px;background:{LAVL};border-bottom:4px solid {INK};display:flex;align-items:center;gap:12px;padding:0 26px">
-  <i style="width:18px;height:18px;border-radius:50%;background:{RED}"></i><i style="width:18px;height:18px;border-radius:50%;background:{YEL}"></i><i style="width:18px;height:18px;border-radius:50%;background:#62D38A"></i>
-  <span style="margin-left:20px;font-size:24px;font-weight:700;color:{GRAY}">패더쿠의 옷장</span></div>
- <div style="padding:34px 40px;display:flex;flex-direction:column;gap:22px;font-size:36px;font-weight:800;letter-spacing:-1px">
-  <div style="display:flex;gap:18px;align-items:center"><span class="chip" style="background:{LAV}">LIVE</span>실시간 쿠폰 · 타임세일</div>
-  <div style="display:flex;gap:18px;align-items:center"><span class="chip" style="background:{LAV}">LINE UP</span>지금 제일 많이 담는 템</div>
-  <div style="display:flex;gap:18px;align-items:center"><span class="chip" style="background:{LAV}">나이대별</span>10·20·30대 브랜드</div>
-  <div style="display:flex;gap:18px;align-items:center"><span class="chip" style="background:{LAV}">코디 팩</span>스타터팩 · 레벨업 팩</div>
- </div></div>
-<img src="{BOX}" style="position:absolute;right:70px;top:1020px;width:230px">
-<div class="bub" style="right:300px;top:1070px">프로필 링크에서!</div>
-''', foot='프로필 링크 → 패더쿠의 옷장'))
+# 7 패더쿠의 옷장 안내 (실제 사이트 캡처)
+SH = {k: b64(os.path.join(D, 'shots', k + '.png')) for k in ['lineup', 'coupon', 'daily']}
+def shot(src, w, x, y, r, label, lc=LAV):
+    return (f'<div style="position:absolute;left:{x}px;top:{y}px;width:{w}px;transform:rotate({r}deg)">'
+            f'<img src="{src}" style="width:100%;display:block;border:4px solid {INK};border-radius:22px;box-shadow:8px 8px 0 {INK}">'
+            f'<span style="position:absolute;left:-12px;top:-22px;background:{lc};color:#fff;font-size:26px;font-weight:900;padding:8px 18px;border-radius:999px;border:3px solid {INK}">{label}</span></div>')
+S.append(frame('05', f'''
+<div style="position:absolute;left:64px;top:140px"><span class="chip">05 · 할인템 모아보기</span>
+<p class="myo" style="margin-top:22px;font-size:68px;line-height:1.16;letter-spacing:-2.5px">매일 바뀌는 할인템은<br><span class="hl">패더쿠의 옷장</span>에</p></div>
+{shot(SH['lineup'], 500, 56, 440, -3, '지금 많이 담는 템')}
+{shot(SH['coupon'], 480, 548, 460, 3, '실시간 쿠폰', RED)}
+{shot(SH['daily'], 640, 60, 950, -1.5, '7시 공개 특가', INK)}
+<img src="{BOX}" style="position:absolute;right:56px;top:1010px;width:220px">
+<div class="bub" style="right:60px;top:870px">프로필 링크에서!</div>
+'''))
 
 # 8 마무리
 S.append(f'''<div style="width:1080px;height:1350px;background:{LAVL};display:flex;flex-direction:column;align-items:center;justify-content:center">
