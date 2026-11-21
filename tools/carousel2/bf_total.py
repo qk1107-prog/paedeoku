@@ -55,12 +55,11 @@ S.append(f'''<div class="pg" style="background-color:{LAVL};background-image:rad
 <div style="position:absolute;left:64px;bottom:60px;font-size:30px;font-weight:800;color:{LAV}">일정 · 회차 · 쿠폰 · 꿀팁 한 번에 →</div>
 </div>''')
 
-# 2 일정 캘린더
-def cal():
+# 2 일정 캘린더 + 날짜별 할인
+def cal(h=84):
     days = ['월', '화', '수', '목', '금', '토', '일']
-    # 11/16(월) ~ 12/6(일)
     seq = [(11, d) for d in range(16, 31)] + [(12, d) for d in range(1, 7)]
-    head = ''.join(f'<div style="text-align:center;font-size:26px;font-weight:800;color:{GRAY if i < 5 else (LAV if i == 5 else RED)}">{d}</div>' for i, d in enumerate(days))
+    head = ''.join(f'<div style="text-align:center;font-size:24px;font-weight:800;color:{GRAY if i < 5 else (LAV if i == 5 else RED)}">{d}</div>' for i, d in enumerate(days))
     cells = ''
     for m, d in seq:
         k = (m, d)
@@ -71,23 +70,34 @@ def cal():
         col = INK if tease else ('#fff' if main else '#B8B5C8')
         ring = f'outline:6px solid {RED};outline-offset:-6px;' if k == (11, 22) else ''
         lab = f'{m}/{d}' if d == 1 or (m, d) == (11, 16) else str(d)
-        st = f'<span style="position:absolute;right:10px;top:6px;font-size:30px;color:{YEL if main else LAV}">★</span>' if star else ''
-        cells += f'<div style="position:relative;height:118px;border-radius:20px;background:{bg};{ring}border:3px solid {INK if (tease or main) else "#E4E1F0"};display:flex;align-items:flex-end;padding:12px 14px;font-size:34px;font-weight:900;color:{col}">{lab}{st}</div>'
-    return f'<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:12px">{head}{cells}</div>'
+        st = f'<span style="position:absolute;right:8px;top:2px;font-size:26px;color:{YEL if main else LAV}">★</span>' if star else ''
+        cells += f'<div style="position:relative;height:{h}px;border-radius:16px;background:{bg};{ring}border:3px solid {INK if (tease or main) else "#E4E1F0"};display:flex;align-items:flex-end;padding:8px 12px;font-size:28px;font-weight:900;color:{col}">{lab}{st}</div>'
+    return f'<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:9px">{head}{cells}</div>'
+
+def drow(date, dc, dfg, title, brands, tag='', tagc=RED):
+    t = f'<span style="margin-left:10px;background:{tagc};color:#fff;font-size:21px;font-weight:900;padding:4px 12px;border-radius:999px;vertical-align:3px">{tag}</span>' if tag else ''
+    return f'''<div style="display:flex;gap:20px;align-items:center;padding:10px 0;border-bottom:3px dashed #E1DDF0">
+<span style="flex:none;width:190px;text-align:center;background:{dc};color:{dfg};border:3px solid {INK};border-radius:14px;padding:9px 0;font-size:27px;font-weight:900;letter-spacing:-0.5px">{date}</span>
+<div style="min-width:0"><p style="font-size:31px;font-weight:900;letter-spacing:-1px;white-space:nowrap">{title}{t}</p>
+<p style="font-size:24px;font-weight:600;color:{GRAY};margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{brands}</p></div></div>'''
+
+ROWS = ''.join([
+    drow('11.20 – 21', YEL, INK, '티징 · 쿠폰부터 받기', '프리 오픈 쿠폰팩 최대 30% · 장바구니 쿠폰 최대 25%'),
+    drow('11.22 – 24', LAV, '#fff', '1회차 아우터 · 킥스', '나이키 최대 55%+20% 쿠폰 · 노스페이스 · 마뗑킴 · 수아레 · 어그', tag='아우터는 이때'),
+    drow('11.25 – 27', LAV, '#fff', '2회차 상의 · 하의', '미쏘 · 아크테릭스 · 마시모두띠 · 에트오소메 · 로긴 앤 로지'),
+    drow('11.28 – 29', LAV, '#fff', '3회차 뷰티 · 잡화', '클리오 · 페리페라 · 나스 · 엠엘비 · 락피쉬웨더웨어'),
+    drow('11.30 – 12.1', LAV, '#fff', '4회차 무료배송 · 무탠다드', '무신사 스탠다드 우먼 · 트릴리온 · 리 · 세컨드솔트'),
+    drow('12.2', INK, '#fff', '파이널 앙코르 아우터 · 킥스', '1회차 놓친 아우터 · 신발 마지막 기회 + 하루특가', tag='마지막', tagc=LAV),
+])
 
 S.append(frame('01', f'''
-<div style="position:absolute;left:64px;top:150px"><span class="chip">01 · 일정</span>
-<p class="myo h" style="margin-top:26px">언제부터<br><span class="hl">언제까지?</span></p></div>
-<div style="position:absolute;left:64px;right:64px;top:500px">{cal()}</div>
-<div style="position:absolute;left:64px;right:64px;top:1080px;display:flex;gap:16px;flex-wrap:wrap;font-size:27px;font-weight:700">
- <span style="display:flex;align-items:center;gap:10px"><i style="width:30px;height:30px;border-radius:8px;background:{YEL};border:3px solid {INK}"></i>티징 11/20~21</span>
- <span style="display:flex;align-items:center;gap:10px"><i style="width:30px;height:30px;border-radius:8px;background:{LAV};border:3px solid {INK}"></i>본편 11/22~12/2</span>
- <span style="display:flex;align-items:center;gap:10px"><b style="color:{LAV};font-size:32px">★</b>하루특가</span>
- <span style="display:flex;align-items:center;gap:10px"><i style="width:30px;height:30px;border-radius:8px;border:5px solid {RED}"></i>본편 오픈 저녁 7시</span>
-</div>
-<img src="{BOX}" style="position:absolute;right:60px;top:150px;width:250px">
-<div class="bub" style="right:250px;top:170px;font-size:30px">본편은 22일 저녁 7시!</div>
-'''))
+<div style="position:absolute;left:64px;top:140px;display:flex;align-items:center;gap:22px"><span class="chip">01 · 일정</span>
+<p class="myo" style="font-size:66px;letter-spacing:-2.5px">언제, <span class="hl">뭐가</span> 싸요?</p></div>
+<div style="position:absolute;left:64px;right:64px;top:250px">{cal()}</div>
+<div style="position:absolute;left:64px;right:64px;top:585px">{ROWS}</div>
+<div class="stk" style="left:64px;top:1168px;font-size:26px;padding:10px 20px;transform:rotate(-1.5deg);background:{YEL}">TIP · ★ 하루특가 11.22 · 11.27 · 12.2 는 그날 밤 12시면 끝</div>
+<img src="{BOX}" style="position:absolute;right:56px;top:96px;width:150px">
+''', foot='무신사 공지·홈페이지 기준 · 11/21 확인 · 브랜드는 회차별 참여 브랜드 일부'))
 
 # 3 회차
 R = [('1회차', '11.22 – 24', '아우터 · 킥스', LAV, '#fff'), ('2회차', '11.25 – 27', '상의 · 하의', '#fff', INK), ('3회차', '11.28 – 29', '뷰티 · 잡화', '#fff', INK), ('4회차', '11.30 – 12.1', '무료배송 · 무탠다드', '#fff', INK), ('파이널', '12.2', '앙코르 아우터 · 킥스', INK, '#fff')]
