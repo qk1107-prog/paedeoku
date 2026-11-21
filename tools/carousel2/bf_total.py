@@ -137,7 +137,7 @@ def shot(src, w, x, y, r, label, lc=LAV):
             f'<span style="position:absolute;left:-12px;top:-22px;background:{lc};color:#fff;font-size:25px;font-weight:900;padding:8px 18px;border-radius:999px;border:3px solid {INK};white-space:nowrap">{label}</span></div>')
 S.append(frame('05', f'''
 <div style="position:absolute;left:64px;top:140px"><span class="chip">05 · 할인템 모아보기</span>
-<p class="myo" style="margin-top:22px;font-size:68px;line-height:1.16;letter-spacing:-2.5px">매일 바뀌는 할인템은<br><span class="hl">패더쿠의 옷장</span>에</p></div>
+<p class="myo" style="margin-top:22px;font-size:68px;line-height:1.16;letter-spacing:-2.5px">매일 바뀌는 블프 할인템은<br><span class="hl">패더쿠의 옷장</span>에</p></div>
 {shot(SH['lineup'], 500, 56, 440, -3, 'AI 실시간 꿀템 트래킹')}
 {shot(SH['coupon'], 480, 548, 460, 3, 'AI 실시간 쿠폰 트래킹', RED)}
 {shot(SH['daily'], 640, 60, 950, -1.5, '매일 하루특가 · 시그니처특가 · 브랜드특가 갱신', INK)}
