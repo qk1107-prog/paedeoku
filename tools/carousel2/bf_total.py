@@ -45,13 +45,15 @@ S.append(f'''<div class="pg" style="background-color:{LAVL};background-image:rad
   <p class="myo" style="font-size:168px;line-height:1.05;letter-spacing:-8px">무신사<br>블프</p>
   <p class="myo" style="font-size:168px;line-height:1.05;letter-spacing:-8px;color:{LAV}"><span class="hl" style="padding:0 10px">총정리</span></p>
 </div>
-<div class="stamp" style="right:70px;top:250px;font-size:44px;padding:18px 30px;transform:rotate(8deg)">저장 필수</div>
-<div class="card" style="position:absolute;left:64px;top:920px;width:300px;padding:26px 28px;transform:rotate(-4deg)">
+<div class="stamp" style="right:60px;top:240px;font-size:36px;padding:16px 26px;transform:rotate(7deg);white-space:nowrap">무신사 고인물의 정리</div>
+<div class="card" style="position:absolute;left:64px;top:880px;width:290px;padding:24px 28px;transform:rotate(-4deg)">
   <p style="font-size:24px;font-weight:700;color:{GRAY}">일정</p><p style="font-size:40px;font-weight:900;letter-spacing:-1px;margin-top:6px">11.20 – 12.2</p></div>
-<div class="card" style="position:absolute;left:330px;top:1000px;width:300px;padding:26px 28px;transform:rotate(3deg);background:{YEL}">
+<div class="card" style="position:absolute;left:350px;top:930px;width:270px;padding:24px 28px;transform:rotate(3deg);background:{YEL}">
   <p style="font-size:24px;font-weight:700">쿠폰</p><p style="font-size:40px;font-weight:900;letter-spacing:-1px;margin-top:6px">최대 30%</p></div>
-<img src="{BOX}" style="position:absolute;right:40px;bottom:120px;width:400px">
-<div class="bub" style="right:250px;bottom:520px">이거 하나면 끝!</div>
+<div class="card" style="position:absolute;left:150px;top:1060px;width:330px;padding:24px 28px;transform:rotate(-2deg);background:{RED};color:#fff">
+  <p style="font-size:24px;font-weight:700;opacity:.9">시그니처특가 할인율</p><p style="font-size:44px;font-weight:900;letter-spacing:-1px;margin-top:6px">최대 69%</p></div>
+<img src="{BOX}" style="position:absolute;right:40px;bottom:130px;width:360px">
+<div class="bub" style="right:220px;bottom:500px">이거 하나면 끝!</div>
 <div style="position:absolute;left:64px;bottom:60px;font-size:30px;font-weight:800;color:{LAV}">일정 · 회차 · 쿠폰 · 꿀팁 한 번에 →</div>
 </div>''')
 
