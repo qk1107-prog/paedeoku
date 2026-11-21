@@ -50,6 +50,16 @@ const wl = (arr, S) => womenFirst((arr || []).filter(okItem), S.menB, S.womB);
 const sigGroups = (gs, S) => (gs || []).map((g) => Object.assign({}, g, { items: wl(g.items, S) })).filter((g) => g.items.length);
 const brandGroups = (gs, S) => (gs || []).map((g) => Object.assign({}, g, { items: wl(g.items, S) })).filter((g) => g.items.length && (!S.menB.has(g.brand) || g.items.some((x) => WOM.test(String(x.name || ""))))).sort((a, b) => (S.womB.has(b.brand) ? 1 : 0) - (S.womB.has(a.brand) ? 1 : 0));
 const dayMap = (days, S) => { const out = {}; Object.keys(days || {}).forEach((d) => { const v = Object.assign({}, days[d]); ["hotA", "hotB", "sig"].forEach((k) => { if (Array.isArray(v[k])) v[k] = wl(v[k], S); }); if (Array.isArray(v.brands)) v.brands = brandGroups(v.brands, S); out[d] = v; }); return out; };
+const spotFor = (mine, md, S) => {
+  const t = (o) => (o && o.at ? Date.parse(o.at) || 0 : 0);
+  const src = !mine ? md : (md && t(md) > t(mine) ? md : mine);
+  if (!src) return src;
+  const c = JSON.parse(JSON.stringify(src));
+  (c.brands || []).forEach((b) => {
+    ["items", "all"].forEach((k) => { if (Array.isArray(b[k])) b[k] = womenFirst(b[k].filter((x) => x && !/남성|\[MEN\]|키즈|KIDS/.test(String(x.name || ""))), S.menB, S.womB); });
+  });
+  return c;
+};
 const has = (x) => Array.isArray(x) ? x.length > 0 : !!(x && Object.keys(x).length);
 async function buildMain() {
   const [M, P, W, B] = await Promise.all([row("main"), row("pdk_main"), row("pdk_brands").catch(() => null), row("brands").catch(() => null)]);
@@ -82,7 +92,8 @@ async function buildMain() {
         now: pb.now || {}, pre: pb.pre || {},
         picks: [], mycart: { on: false },
         // 실시간 칸: 패더쿠 전용 데이터가 있으면 그걸, 없으면 MD STUDIO 것에서 남성 전용만 빼고
-        spot: pb.spot || noMen(mb.spot),
+        // 브랜드 쿠폰 칸(노스페이스 등): MD STUDIO가 매시간 갱신하니 더 최신 쪽을 쓰고, 여성·공용 상품을 앞으로
+        spot: spotFor(pb.spot, mb.spot, S),
         ts: pb.ts || forWomen(noMen(mb.ts), S),
         dm: pb.dm || forWomen(noMen(mb.dm), S),
         hot: pb.hot || forWomen(noMenHot(mb.hot), S, true),
