@@ -20,8 +20,34 @@ const noMen = (o) => {
   return c;
 };
 const noMenHot = (o) => { if (!o) return undefined; const c = JSON.parse(JSON.stringify(o)); (c.cats || []).forEach((k) => { k.items = (k.items || []).filter(okItem); }); return c; };
+// 남성 전용 브랜드(MD STUDIO 남성 그룹에만 있고 패더쿠 여성 그룹엔 없는 브랜드)는 빼고, 여성 신호 있는 상품을 앞으로
+const WOM = /여성|우먼|WOMEN|W\)|공용|유니섹스|UNISEX/i;
+function womenFirst(list, menB, womB) {
+  if (!Array.isArray(list)) return list;
+  const keep = list.filter((x) => x && (WOM.test(String(x.name || "")) || !menB.has(x.brand)));
+  const score = (x) => (WOM.test(String(x.name || "")) ? 2 : 0) + (womB.has(x.brand) ? 1 : 0);
+  return keep.map((x, i) => [x, i]).sort((a, b) => score(b[0]) - score(a[0]) || a[1] - b[1]).map((a) => a[0]);
+}
+function sexSets(W, B) {
+  const F = new Set(), M = new Set();
+  ((W && W.groups) || []).forEach((g) => (g.brands || []).forEach((y) => F.add(y.b)));
+  ((B && B.groups) || []).filter((g) => /^M\|/.test(g.key)).forEach((g) => (g.brands || []).forEach((y) => M.add(y.b)));
+  return { womB: F, menB: new Set([...M].filter((n) => !F.has(n))) };
+}
+const forWomen = (o, S, hot) => {
+  if (!o) return o;
+  const c = JSON.parse(JSON.stringify(o));
+  if (hot) {
+    (c.cats || []).forEach((k) => { k.items = womenFirst(k.items || [], S.menB, S.womB); });
+    if (Array.isArray(c.rise)) c.rise = womenFirst(c.rise, S.menB, S.womB);
+    else if (c.rise && Array.isArray(c.rise.items)) c.rise.items = womenFirst(c.rise.items, S.menB, S.womB);
+  }
+  else if (Array.isArray(c.items)) c.items = womenFirst(c.items, S.menB, S.womB);
+  return c;
+};
 async function buildMain() {
-  const [M, P] = await Promise.all([row("main"), row("pdk_main")]);
+  const [M, P, W, B] = await Promise.all([row("main"), row("pdk_main"), row("pdk_brands").catch(() => null), row("brands").catch(() => null)]);
+  const S = sexSets(W, B);
   const mb = (M && M.bf) || {}, pb = (P && P.bf) || {};
   const mt = mb.teaser || {};
   return {
@@ -51,9 +77,9 @@ async function buildMain() {
         picks: [], mycart: { on: false },
         // 실시간 칸: 패더쿠 전용 데이터가 있으면 그걸, 없으면 MD STUDIO 것에서 남성 전용만 빼고
         spot: pb.spot || noMen(mb.spot),
-        ts: pb.ts || noMen(mb.ts),
-        dm: pb.dm || noMen(mb.dm),
-        hot: pb.hot || noMenHot(mb.hot),
+        ts: pb.ts || forWomen(noMen(mb.ts), S),
+        dm: pb.dm || forWomen(noMen(mb.dm), S),
+        hot: pb.hot || forWomen(noMenHot(mb.hot), S, true),
       }
     ),
   };
