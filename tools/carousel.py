@@ -151,12 +151,18 @@ def info(s):
 </div>"""
 
 def cta(s, mascot):
-    m = f'<img src="{E(mascot)}" alt="패더쿠" style="width: 420px; height: 420px; border-radius: 50%; display: block">' if mascot else ''
-    return f"""<div style="width: 1080px; height: 1350px; box-sizing: border-box; background: {LAV}; font-family: {KR}; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 44px; text-align: center; color: {INK}">
+    # 마지막 장: 링크 안내 + 패더쿠 소개글
+    m = f'<img src="{E(mascot)}" alt="패더쿠" style="width: 380px; height: 380px; border-radius: 50%; display: block">' if mascot else ''
+    l1 = s.get('l1') or '제품 할인 링크 모음은'
+    l2 = s.get('l2') or '아무 댓글이나 남겨주세요'
+    bio = s.get('bio') or '패션 덕후가 매일 채우는 할인 박스'
+    return f"""<div style="width: 1080px; height: 1350px; box-sizing: border-box; background: {LAV}; font-family: {KR}; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 48px; text-align: center; color: {INK}">
 {m}
-<h1 style="margin: 0; font-size: 76px; font-weight: 700; letter-spacing: -2px; line-height: 1.3">{E(s.get('l1'))}<br>{E(s.get('l2'))}</h1>
-<p style="margin: 0; font-size: 34px; font-weight: 700; color: #FFFFFF; background: {LAV2}; border-radius: 999px; padding: 18px 40px">댓글에 '{E(s.get('kw', '옷장'))}' 남기면 링크 보내드려요</p>
-<p style="margin: 0; font-size: 26px; font-weight: 500; color: #6E6880">프로필 링크 '패더쿠의 옷장'에도 다 있어요</p>
+<h1 style="margin: 0; font-size: 72px; font-weight: 700; letter-spacing: -2px; line-height: 1.3">{E(l1)}<br><span style="color: {LAV2}">{E(l2)}</span></h1>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 12px">
+<p style="margin: 0; font-size: 40px; font-weight: 700; letter-spacing: -0.5px">패더쿠</p>
+<p style="margin: 0; font-size: 32px; font-weight: 500; color: #4A4560; background: #FFFFFF; border-radius: 999px; padding: 16px 36px">{E(bio)}</p>
+</div>
 </div>"""
 
 def main(spec_path, root):
