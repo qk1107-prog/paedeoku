@@ -151,18 +151,15 @@ def info(s):
 </div>"""
 
 def cta(s, mascot):
-    # 마지막 장: 링크 안내 + 패더쿠 소개글
-    m = f'<img src="{E(mascot)}" alt="패더쿠" style="width: 380px; height: 380px; border-radius: 50%; display: block">' if mascot else ''
-    l1 = s.get('l1') or '제품 할인 링크 모음은'
-    l2 = s.get('l2') or '아무 댓글이나 남겨주세요'
+    # 마지막 장: 패더쿠 + 소개글만 (깔끔한 라벤더 기본형)
+    import base64
+    box = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'endcard_box.png')
+    src = 'data:image/png;base64,' + base64.b64encode(open(box, 'rb').read()).decode() if os.path.exists(box) else (mascot or '')
     bio = s.get('bio') or '패션 덕후가 매일 채우는 할인 박스'
-    return f"""<div style="width: 1080px; height: 1350px; box-sizing: border-box; background: {LAV}; font-family: {KR}; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 48px; text-align: center; color: {INK}">
-{m}
-<h1 style="margin: 0; font-size: 72px; font-weight: 700; letter-spacing: -2px; line-height: 1.3">{E(l1)}<br><span style="color: {LAV2}">{E(l2)}</span></h1>
-<div style="display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 12px">
-<p style="margin: 0; font-size: 40px; font-weight: 700; letter-spacing: -0.5px">패더쿠</p>
-<p style="margin: 0; font-size: 32px; font-weight: 500; color: #4A4560; background: #FFFFFF; border-radius: 999px; padding: 16px 36px">{E(bio)}</p>
-</div>
+    return f"""<div style="width: 1080px; height: 1350px; box-sizing: border-box; background: #ECE8FF; font-family: {KR}; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center">
+<img src="{src}" alt="패더쿠" style="width: 470px; display: block">
+<p style="margin: 70px 0 0; font-size: 120px; font-weight: 900; letter-spacing: -4px; line-height: 1.1; color: #16151C">패더쿠</p>
+<p style="margin: 26px 0 0; font-size: 40px; font-weight: 500; letter-spacing: -1px; color: #5B5BF0">{E(bio)}</p>
 </div>"""
 
 def main(spec_path, root):
@@ -178,7 +175,7 @@ def main(spec_path, root):
         c['pages'].insert(0, {"id": pid, "name": spec.get('page_name') or label})
     files = []
     bodies = [('1 표지', cover(spec['cover']))]
-    names = {'grid': '제품', 'single': '단일컷', 'info': '행사', 'cta': '링크 안내'}
+    names = {'grid': '제품', 'single': '단일컷', 'info': '행사', 'cta': '마무리'}
     for i, s in enumerate(spec['slides'][:4]):
         k = s['kind']
         body = (grid_titled(s) if s.get('title') else grid(s['items'])) if k == 'grid' else info(s) if k == 'info' else cta(s, spec.get('mascot')) if k == 'cta' else single(s)

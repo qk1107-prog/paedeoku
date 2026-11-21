@@ -45,6 +45,12 @@ const forWomen = (o, S, hot) => {
   else if (Array.isArray(c.items)) c.items = womenFirst(c.items, S.menB, S.womB);
   return c;
 };
+// 시그니처·브랜드특가·날짜별 칸: 패더쿠 전용이 없으면 MD STUDIO 것을 여성 위주로 (7시 공개 때 MD가 채우면 같이 열림)
+const wl = (arr, S) => womenFirst((arr || []).filter(okItem), S.menB, S.womB);
+const sigGroups = (gs, S) => (gs || []).map((g) => Object.assign({}, g, { items: wl(g.items, S) })).filter((g) => g.items.length);
+const brandGroups = (gs, S) => (gs || []).map((g) => Object.assign({}, g, { items: wl(g.items, S) })).filter((g) => g.items.length && (!S.menB.has(g.brand) || g.items.some((x) => WOM.test(String(x.name || ""))))).sort((a, b) => (S.womB.has(b.brand) ? 1 : 0) - (S.womB.has(a.brand) ? 1 : 0));
+const dayMap = (days, S) => { const out = {}; Object.keys(days || {}).forEach((d) => { const v = Object.assign({}, days[d]); ["hotA", "hotB", "sig"].forEach((k) => { if (Array.isArray(v[k])) v[k] = wl(v[k], S); }); if (Array.isArray(v.brands)) v.brands = brandGroups(v.brands, S); out[d] = v; }); return out; };
+const has = (x) => Array.isArray(x) ? x.length > 0 : !!(x && Object.keys(x).length);
 async function buildMain() {
   const [M, P, W, B] = await Promise.all([row("main"), row("pdk_main"), row("pdk_brands").catch(() => null), row("brands").catch(() => null)]);
   const S = sexSets(W, B);
@@ -66,9 +72,9 @@ async function buildMain() {
         teaser: Object.assign(pick(mt, ["info", "alarms", "at"]), pb.teaser || {}),
         padding: pb.padding || { groups: [] },
         xmas: pb.xmas || { groups: [] },
-        sigPreview: pb.sigPreview || [],
-        sigBrands: pb.sigBrands || [],
-        days: pb.days || {},
+        sigPreview: has(pb.sigPreview) ? pb.sigPreview : sigGroups(mb.sigPreview, S),
+        sigBrands: has(pb.sigBrands) ? pb.sigBrands : brandGroups(mb.sigBrands, S),
+        days: has(pb.days) ? pb.days : dayMap(mb.days, S),
         bestTabs: pb.bestTabs || {},
         bestCats: pb.bestCats || {},
         best: pb.best || [],
