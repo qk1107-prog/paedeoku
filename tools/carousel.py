@@ -59,11 +59,20 @@ def bgimg(src):
         return f'<img src="{E(src)}" alt="" style="position: absolute; left: 0; top: 0; width: 1080px; height: 1350px; object-fit: cover; display: block">'
     return f'<div style="position: absolute; inset: 0; background: {PH}"></div>'
 
+def badge(b):
+    if not b: return ''
+    top, big = (b.split('|') + [''])[:2]
+    return f"""<div style="position: absolute; right: 56px; top: 48px; width: 300px; height: 300px; border-radius: 50%; background: {LAV2}; color: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center; transform: rotate(-8deg); box-shadow: 0 10px 30px rgba(0,0,0,0.25)">
+<p style="margin: 0; font-size: 40px; font-weight: 700; text-shadow: none">{E(top)}</p>
+<p style="margin: 0; font-size: 112px; font-weight: 700; letter-spacing: -4px; line-height: 1; text-shadow: none">{E(big)}</p>
+</div>"""
+
 def cover(c):
     return f'''<div style="width: 1080px; height: 1350px; position: relative; overflow: hidden; background: #CFCAC6; font-family: {KR}; color: #FFFFFF">
 {bgimg(c.get('img'))}
 <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.04) 0%, rgba(0,0,0,0.10) 40%, rgba(0,0,0,0.55) 100%)"></div>
 <p style="position: absolute; left: 64px; top: 60px; margin: 0; font-size: 32px; font-weight: 700; text-shadow: 0 2px 12px rgba(0,0,0,0.25)">패더쿠</p>
+{badge(c.get('badge'))}
 <div style="position: absolute; left: 60px; right: 60px; top: 790px; display: flex; flex-direction: column; align-items: center; gap: 22px; text-shadow: 0 2px 16px rgba(0,0,0,0.28)">
 <p style="margin: 0; font-size: 32px; font-weight: 500">{E(c.get('label'))}</p>
 <h1 style="margin: 0; font-size: 100px; font-weight: 700; letter-spacing: -3px; line-height: 1.2; text-align: center">{E(c.get('l1'))}<br>{E(c.get('l2'))}</h1>
@@ -152,7 +161,7 @@ def cta(s, mascot):
 
 def main(spec_path, root):
     spec = json.load(open(spec_path))
-    d = spec['date']; key = d.replace('-', '')[2:]  # 261121
+    d = spec['date']; key = spec.get('key') or d.replace('-', '')[2:]  # 261121
     proj = os.path.join(root, 'project'); os.makedirs(proj, exist_ok=True)
     cpath = os.path.join(proj, 'canvas.json')
     c = json.load(open(cpath)) if os.path.exists(cpath) else {"v": 3, "createdOnFiles": {"v": 1, "at": datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')}, "title": "패더쿠 오늘의 캐러셀", "pages": [], "boards": {}, "order": [], "notes": {}, "designSystems": []}
@@ -160,7 +169,7 @@ def main(spec_path, root):
     label = f'{int(d[5:7])}/{int(d[8:10])}'
     c.setdefault('pages', [])
     if not any(p['id'] == pid for p in c['pages']):
-        c['pages'].insert(0, {"id": pid, "name": label})
+        c['pages'].insert(0, {"id": pid, "name": spec.get('page_name') or label})
     files = []
     bodies = [('1 표지', cover(spec['cover']))]
     names = {'grid': '제품', 'single': '단일컷', 'info': '행사', 'cta': '링크 안내'}
@@ -175,7 +184,7 @@ def main(spec_path, root):
         if f not in c['order']: c['order'].append(f)
         files.append(f)
     c.setdefault('notes', {})[f'cap{key}'] = {"x": 5 * 1160, "y": 0, "w": 900, "size": "m", "fill": "orange", "page": pid, "text": spec.get('caption', '')}
-    c['notes'][f't{key}'] = {"x": 0, "y": -300, "text": f'{label} 오늘의 캐러셀', "kind": "title1", "maxW": 5600, "page": pid}
+    c['notes'][f't{key}'] = {"x": 0, "y": -300, "text": spec.get('title') or f'{label} 오늘의 캐러셀', "kind": "title1", "maxW": 5600, "page": pid}
     c['launch'] = {"view": "canvas", "page": pid}
     json.dump(c, open(cpath, 'w'), ensure_ascii=False, indent=1)
     print(json.dumps({"files": ["project/" + f for f in files], "page": pid}, ensure_ascii=False))
