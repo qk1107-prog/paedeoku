@@ -53,11 +53,15 @@
     await Promise.all(Array.from({ length: 8 }, async () => { while (k < ids.length) { const id = ids[k++]; try { const d = (await (await fetch('https://goods-detail.musinsa.com/api2/goods/' + id, { credentials: 'include' })).json()).data; const t = await look('https://image.msscdn.net' + d.thumbnailImageUrl); if (t && t.white > 0.8 && t.skin < 0.03) for (const g of (d.goodsImages || []).slice(0, 10)) { const s2 = await look('https://image.msscdn.net' + g.imageUrl); if (s2 && s2.skin >= 0.04 && !(s2.white > 0.8 && s2.skin < 0.06)) { M[id] = 'https://image.msscdn.net' + g.imageUrl; break; } } } catch (e) {} } }));
     all.forEach((x) => { if (M[x.i]) x.img = M[x.i]; });
   }
+  // 손으로 다듬은 라인업·분위기별·노스페이스 칸은 덮어쓰지 않고 그대로 유지
+  let prev = {}; try { const K = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNidXlkamt2dnpibHV5b2hka2llIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk2MjYxMDIsImV4cCI6MjEwNTIwMjEwMn0.dYpj7w5zpyrWeF4YgQ19U6rN3x0pxZwVo8QNiosV4KI'; prev = ((await (await fetch('https://cbuydjkvvzbluyohdkie.supabase.co/rest/v1/site_data?id=eq.pdk_main&select=value', { headers: { apikey: K, Authorization: 'Bearer ' + K } })).json())[0] || {}).value || {}; } catch (e) {}
+  if (prev.lineupAt && Array.isArray(prev.lineup) && prev.lineup.length >= 10) lineup.splice(0, lineup.length, ...prev.lineup);
+  if (prev.moodAt && Array.isArray(prev.moodCats) && prev.moodCats.length) moodCats.splice(0, moodCats.length, ...prev.moodCats);
   const out = {
-    at: new Date().toISOString(),
+    at: new Date().toISOString(), lineupAt: prev.lineupAt, moodAt: prev.moodAt,
     site: { name: '패더쿠의 옷장', brand: '패더쿠', avatar: 'https://paedeoku.vercel.app/img/avatar.jpg', instagram: 'paedeoku', footer: '패더쿠의 옷장 · 패션 할인 소식 제일 빠른 곳', bio: '🔥 무진장 · 무신사 블랙프라이데이 할인 소식 제일 빠른 곳\n남녀 상관없이 지금 제일 핫한 아이템만 골라서 정리했어요\n블프 탭부터 보시고, 카테고리 꿀템도 둘러보세요' },
     lineup, moodCats,
-    bf: { padding, xmas, teaser, sigPreview: [], sigBrands: [], days: {}, bestTabs: {} },
+    bf: { padding, xmas, teaser, sigPreview: [], sigBrands: [], days: {}, bestTabs: {}, spot: (prev.bf && prev.bf.spot) || undefined },
   };
   window.__pdkMain = JSON.stringify(out);
   document.title = '패더쿠 블프 준비 완료 ' + window.__pdkMain.length;
