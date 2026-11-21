@@ -57,7 +57,8 @@ const spotFor = (mine, md, S) => {
   if (!src) return src;
   const c = JSON.parse(JSON.stringify(src));
   (c.brands || []).forEach((b) => {
-    ["items", "all"].forEach((k) => { if (Array.isArray(b[k])) b[k] = womenFirst(b[k].filter((x) => x && !/남성|\[MEN\]|키즈|KIDS/.test(String(x.name || ""))), S.menB, S.womB); });
+    // 패더쿠 전용 데이터는 남녀 섞은 순서 그대로(공유용), MD 것만 키즈 빼기
+    ["items", "all"].forEach((k) => { if (Array.isArray(b[k])) b[k] = b[k].filter((x) => x && !/키즈|KIDS/.test(String(x.name || ""))); });
   });
   return c;
 };
