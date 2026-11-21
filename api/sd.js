@@ -52,7 +52,8 @@ const brandGroups = (gs, S) => (gs || []).map((g) => Object.assign({}, g, { item
 const dayMap = (days, S) => { const out = {}; Object.keys(days || {}).forEach((d) => { const v = Object.assign({}, days[d]); ["hotA", "hotB", "sig"].forEach((k) => { if (Array.isArray(v[k])) v[k] = wl(v[k], S); }); if (Array.isArray(v.brands)) v.brands = brandGroups(v.brands, S); out[d] = v; }); return out; };
 const spotFor = (mine, md, S) => {
   const t = (o) => (o && o.at ? Date.parse(o.at) || 0 : 0);
-  const src = !mine ? md : (md && t(md) > t(mine) ? md : mine);
+  // 패더쿠 전용(여성 컬렉션)이 있으면 그걸, 없을 때만 MD STUDIO 것(남성 위주)을 여성·공용 먼저로
+  const src = mine && (mine.brands || []).length ? mine : md;
   if (!src) return src;
   const c = JSON.parse(JSON.stringify(src));
   (c.brands || []).forEach((b) => {
